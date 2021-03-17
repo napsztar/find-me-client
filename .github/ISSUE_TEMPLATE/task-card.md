@@ -18,7 +18,6 @@ assignees: ''
 3. [ ] Job3
 
 ### Estimated time
-> Pick one
 ### `0.5h`
 ### `1h`
 ### `1.5h`
