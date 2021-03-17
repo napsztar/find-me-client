@@ -28,5 +28,5 @@ assignees: ''
 ### Labels
 - Estimated time: `E: 1h`
 - Group : `client`
-- Sprint: `Sprint__2__`
+- Sprint: `Sprint__3__`
 - Urgency: `High`, `Middle`, `Low`
