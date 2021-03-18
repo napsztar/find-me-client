@@ -1,8 +1,7 @@
-import List from './components/answer/List';
-import SignIn from './components/user/SignIn';
+import Signup from './components/user/Signup';
 
 const App = () => {
-  return <SignIn />; // TODO : 예시 화면일 뿐 변경 하면 됨
-};
+  return <Signup />; // TODO : 예시 화면일 뿐 변경 하면 됨
+
 
 export default App;
