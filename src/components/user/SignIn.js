@@ -28,7 +28,7 @@ const Signin = () => {
             email: email,
             password: password,
           },
-          { 'Content-Type': 'application/json' },
+          { 'Content-Type': 'application/json', withCredentials: true },
         )
         .then(() => console.log('success!'));
     }
