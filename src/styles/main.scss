@@ -1,54 +1,36 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   background: white;
+}
+
+img {
+  display: flex;
+  text-align: center;
 }
 
 .container {
   display: flex;
   flex-direction: column;
-  width: 375px;
+  width: 100%;
+  height: 100%;
+  max-width: 375px; // width: 375px;
   margin-left: auto;
   margin-right: auto;
   background: lightgrey; // TODO : 작업 색상 구분용 추후 변경 필요
   height: 720px; // TODO : 작업용 크기 추후 변경 필요
-
-  .content {
-    margin: 0 20px;
-  }
+  //   .content {
+  //   margin: 0 20px;
+  // }
 }
 
-
 input {
+  display: flex;
   border: none;
   width: 20em;
   height: 2em;
-  margin-bottom: 2em;
+  margin: 2em 3em;
   align-items: center;
-
-.logo-contianer {
-  flex: 3 1 auto;
-}
-
-.logo {
-  text-align: center;
-}
-
-.signin-container {
-  flex: 1 1 auto;
-  text-align: center;
-}
-
-.email-container {
-  margin: 1em;
-}
-
-.password-container {
-  margin: 1em;
-}
-
-.social-container {
-  flex: 1 1 auto;
-}
-
-.signup-info-container {
-  flex: 1 1 auto;
 }
