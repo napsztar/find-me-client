@@ -1,27 +1,50 @@
 import React, { useState } from 'react';
 import '../../styles/main.scss';
 import { withRouter } from 'react-router-dom';
+import axios from 'axios';
 
-const Signup = () => {
-  const [email, setEmail] = useState('');
-  const [nickName, setNickName] = useState('');
-  const [password, setPassword] = useState('');
+const Signup = ({ history }) => {
+  const [errorMessage, setErrorMessage] = useState('');
+  const [inputs, setInputs] = useState({
+    email: '',
+    nickname: '',
+    password: '',
+    checkPassword: '',
+  });
 
-  const onChangeEmail = e => {
-    setEmail(e.target.value);
+  const { email, nickname, password, checkPassword } = inputs;
+
+  const onChangeInput = e => {
+    const { value, name } = e.target;
+    setInputs({
+      ...inputs,
+      [name]: value,
+    });
   };
 
-  const onChangePassword = e => {
-    setPassword(e.target.value);
-  };
-
-  const onChangeNickname = e => {
-    setNickName(e.target.value);
-  };
-
-  const onClick = () => {
-    setEmail('');
-    setPassword('');
+  const handleSignup = () => {
+    if (!email || !nickname || !password || !checkPassword) {
+      setErrorMessage('모든 항목을 입력해주세요');
+    } else if (password !== checkPassword) {
+      setErrorMessage('비밀번호가 일치하지 않습니다');
+    } else {
+      axios
+        .post(
+          'http://localhost:5000/users/signup',
+          {
+            email: email,
+            nickname: nickname,
+            password: password,
+          },
+          { 'Content-Type': 'application/json' },
+        )
+        .then(() => history.push('/'))
+        .catch(err => {
+          err.response.status === 409
+            ? alert('이미 존재하는 회원입니다.')
+            : alert(err);
+        });
+    }
   };
 
   return (
@@ -30,17 +53,50 @@ const Signup = () => {
         <div>header</div>
       </div>
       <div className="userinfo-container">
-        <div className="email">Email:</div>
-        <input type="email" placeholder="Email"></input>
-        <div className="nickname">Nickname:</div>
-        <input type="nickname" placeholder="Nickname"></input>
-        <div className="password">Password:</div>
-        <input type="password" placeholder="Password"></input>
-        <div className="change-password">Change password:</div>
-        <input type="password" placeholder="Enter a password to change"></input>
+        <form onSubmit={e => e.preventDefault()}>
+          <div>
+            <span>Email</span>
+            <input
+              type="email"
+              onChange={onChangeInput}
+              name="email"
+              value={email}
+            ></input>
+          </div>
+          <div>
+            <span>Nickname</span>
+            <input
+              type="nickname"
+              onChange={onChangeInput}
+              name="nickname"
+              value={nickname}
+            ></input>
+          </div>
+          <div>
+            <span>Password</span>
+            <input
+              type="password"
+              onChange={onChangeInput}
+              name="password"
+              value={password}
+            ></input>
+          </div>
+          <div>
+            <span>Check Password</span>
+            <input
+              type="password"
+              onChange={onChangeInput}
+              name="checkPassword"
+              value={checkPassword}
+            ></input>
+          </div>
+        </form>
       </div>
       <div className="signup-btn">
-        <button>Signup</button>
+        <button onClick={handleSignup}>Signup</button>
+        {errorMessage === '' ? null : (
+          <div className="message-box">{errorMessage}</div>
+        )}
       </div>
     </div>
   );

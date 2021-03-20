@@ -29,7 +29,7 @@ const App = ({ history }) => {
         'Content-Type': 'application/json',
       })
       .then(res => console.log(res));
-    // .then(res => {
+    // .then((res) => {
     //   history.push('/question');
     //   setSigninstauts({ isSignin: true, userInfo: res.data });
     // });
@@ -47,7 +47,6 @@ const App = ({ history }) => {
     //.then(res => console.log(res));
   };
 
-  //이미 로그인 상태라면 리다이렉트
   return (
     <div>
       <Switch>
