@@ -48,7 +48,7 @@ const Mypage = ({ handleDelete }) => {
   //회원탈퇴, 비밀번호 변경 서로 다른 알림 나오게 변경하기 or 모달로 변경하기
   return (
     <div>
-      <div classame="container">
+      <div className="container">
         <form onSubmit={e => e.preventDefault()}>
           <div>
             <span>Email</span>
@@ -73,7 +73,7 @@ const Mypage = ({ handleDelete }) => {
             <input
               type="current-password"
               onChange={onChangeInput}
-              name="password"
+              name="current-password"
               value={password}
             ></input>
           </div>
@@ -84,7 +84,7 @@ const Mypage = ({ handleDelete }) => {
               type="new-password"
               placeholder="Enter a password to change"
               onChange={onChangeInput}
-              name="changePassword"
+              name="new-password"
               value={changePassword}
             ></input>
           </div>
@@ -92,12 +92,16 @@ const Mypage = ({ handleDelete }) => {
             className="button-change-password"
             type="submit"
             onClick={rePassword}
-          ></button>
+          >
+            비밀번호 변경
+          </button>
           <button
             className="button-delete"
             type="submit"
             onClick={handleDelete}
-          ></button>
+          >
+            회원탈퇴
+          </button>
           {errorMessage === '' ? null : (
             <div className="mssage-info">{errorMessage}</div>
           )}
