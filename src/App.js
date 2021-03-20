@@ -10,6 +10,7 @@ import Signup from './components/user/Signup';
 import Mypage from './components/user/Mypage';
 import axios from 'axios';
 import { useState } from 'react';
+import TestModal from './components/test/TestModal';
 
 //Switch 안에 계속 추가해서 설정하면 된다.
 const App = ({ history }) => {
@@ -55,6 +56,7 @@ const App = ({ history }) => {
           <Signin handleSigninSuccess={handleSigninSuccess} />
         </Route>
         <Route exact path="/users/signup" component={Signup} />
+        <Route exact path="/test/modal" component={TestModal} />
         <Route exact path="/users">
           <Mypage handleDelete={handleDelete} />
         </Route>
