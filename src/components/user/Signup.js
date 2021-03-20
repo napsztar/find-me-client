@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import '../../styles/main.scss';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
+import '../header/Header';
+import '../../styles/main.scss';
+import Header from '../header/Header';
 
-const Signup = ({ history }) => {
+const SignUp = ({ history }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [inputs, setInputs] = useState({
     email: '',
@@ -49,9 +51,7 @@ const Signup = ({ history }) => {
 
   return (
     <div className="container">
-      <div className="logo-container">
-        <div>header</div>
-      </div>
+      <Header />
       <div className="userinfo-container">
         <form onSubmit={e => e.preventDefault()}>
           <div>
@@ -102,4 +102,4 @@ const Signup = ({ history }) => {
   );
 };
 
-export default withRouter(Signup);
+export default withRouter(SignUp);

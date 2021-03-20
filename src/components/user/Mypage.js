@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import '../../styles/main.scss';
 
-const Mypage = ({ handleDelete }) => {
+const MyPage = ({ handleDelete }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [inputs, setInputs] = useState({
     email: '',
@@ -71,7 +71,7 @@ const Mypage = ({ handleDelete }) => {
           <div>
             <span>Password</span>
             <input
-              type="current-password"
+              type="password"
               onChange={onChangeInput}
               name="current-password"
               value={password}
@@ -81,7 +81,7 @@ const Mypage = ({ handleDelete }) => {
           <div>
             <span>Change Password</span>
             <input
-              type="new-password"
+              type="password"
               placeholder="Enter a password to change"
               onChange={onChangeInput}
               name="new-password"
@@ -111,4 +111,4 @@ const Mypage = ({ handleDelete }) => {
   );
 };
 
-export default withRouter(Mypage);
+export default withRouter(MyPage);

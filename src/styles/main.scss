@@ -34,3 +34,15 @@ input {
   margin: 2em 3em;
   align-items: center;
 }
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+}
+
+:link {
+  display: flex;
+  text-decoration: none;
+}
