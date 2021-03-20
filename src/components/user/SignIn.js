@@ -4,7 +4,7 @@ import '../../styles/main.scss';
 import logo from '../../image/logo.png';
 import axios from 'axios';
 
-const Signin = () => {
+const Signin = ({ handleSigninSuccess }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -28,9 +28,10 @@ const Signin = () => {
             email: email,
             password: password,
           },
-          { 'Content-Type': 'application/json', withCredentials: true },
+          { 'Content-Type': 'application/json' },
         )
-        .then(() => console.log('success!'));
+        .then(() => handleSigninSuccess());
+      //.then(res => console.log(res));
     }
   };
 
@@ -63,16 +64,15 @@ const Signin = () => {
         </div>
         <div className="error-box">{errorMessage}</div>
       </form>
-
       <div className="social-container">
         <span className="social-icon">소셜 아이콘 넣기</span>
-        <span className="move-social">소셜페이지로(a태크로?link로?)</span>
+        <Link to="/">소셜페이지?</Link>
       </div>
-
       <div className="signup-info-container">
         <span className="signup-info">계정이 없으신가요?</span>
         <Link to="/users/signup">가입하기</Link>
       </div>
+      s
     </div>
   );
 };
