@@ -50,14 +50,11 @@ const App = ({ history }) => {
           <SignUp handleSignOutSuccess={handleSignOutSuccess} />
         </Route>
         <Route exact path="/test/modal" component={TestModal} />
-        <Route exact path="/answer/:answerId" component={Read} />
         <Route exact path="/intro" component={Intro} />
         <Route exact path="/answer/" component={List} />
-        <Route
-          exact
-          path={['/answer/add', '/answer/:answerId/edit']}
-          component={List}
-        />
+        <Route exact path="/answer/add" component={Add} />
+        <Route exact path="/answer/:answerId/edit" component={Edit} />
+        {/*<Route exact path="/answer/:answerId" component={Read} />*/}
         <Route exact path="/users">
           <MyPage handleDelete={handleDelete} />
         </Route>

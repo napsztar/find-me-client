@@ -5,6 +5,8 @@ import introImg from '../image/intro.jpg';
 import QuestionContext, { QuestionProvider } from '../contexts/question';
 import { equalsDate, isEmptyObject } from '../utils/common';
 import { Link } from 'react-router-dom';
+import FloatingButton from '../utils/FloatingButton';
+import { MdModeEdit } from 'react-icons/md';
 
 const IntroQuestion = () => {
   const { state, actions } = useContext(QuestionContext);
@@ -49,6 +51,7 @@ const IntroQuestion = () => {
       <Link to={'/answer/'}>
         <img src={introImg} alt="intro" width="100%" />
       </Link>
+      <FloatingButton children={<MdModeEdit size={25} />} to="/answer/add" />
     </div>
   );
 };
