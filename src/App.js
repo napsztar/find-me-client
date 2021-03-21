@@ -1,5 +1,4 @@
 import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
-import Add from './components/answer/Add';
 import Edit from './components/answer/Edit';
 import List from './components/answer/List';
 import Read from './components/answer/Read';
@@ -58,6 +57,7 @@ const App = ({ history }) => {
         <Route exact path="/users/signup" component={SignUp} />
         <Route exact path="/test/modal" component={TestModal} />
         <Route exact path="/answer/:answerId" component={Read} />
+        <Route exact path="/intro" component={Intro} />
         <Route exact path="/answer/" component={List} />
         <Route
           exact
