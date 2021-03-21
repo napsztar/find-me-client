@@ -1,43 +1,63 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import axios from 'axios';
 import logo from '../image/logo.png';
+import introImg from '../image/intro.jpg';
+import QuestionContext, { QuestionProvider } from '../contexts/question';
+import { equalsDate, isEmptyObject } from '../utils/common';
+import { Link } from 'react-router-dom';
 
-const Intro = () => {
-  const [question, setQuestion] = useState(null);
-  const [loading, setLoading] = useState(false);
+const IntroQuestion = () => {
+  const { state, actions } = useContext(QuestionContext);
   useEffect(() => {
-    (async () => {
-      setLoading(true);
-      try {
-        const response = await axios.post(
-          `${process.env.REACT_APP_SERVER_HOST}/intro`,
-          {},
-          { 'Content-Type': 'application/json' },
-        );
-        setQuestion(response.data);
-      } catch (e) {
-        console.log(e);
-      }
-      setLoading(false);
-    })();
+    if (
+      isEmptyObject(state.question) ||
+      !equalsDate(state.question.questionAt)
+    ) {
+      (async () => {
+        actions.setLoading(true);
+        try {
+          const response = await axios.post(
+            `${process.env.REACT_APP_SERVER_HOST}/intro`,
+            {},
+            { 'Content-Type': 'application/json' },
+          );
+          actions.setQuestion(response.data);
+        } catch (e) {
+          console.log(e);
+        }
+        actions.setLoading(false);
+      })();
+    }
+
+    return () => {
+      actions.setLoading(false);
+    };
   }, []);
-  if (loading) {
+  if (state.loading) {
     return <div>loading...</div>;
   }
-  if (!question) {
+  if (!state.question) {
     return null;
   }
-  console.log(question);
-
   return (
     <div className="container intro">
       <div className="logo-container">
-        <img src={logo} alt="logo" width="380px" height="320px"></img>
+        <img src={logo} alt="logo" width="100%" />
       </div>
       <div className="title">Today's carrot question</div>
-      <div className="today-question">{question.questionContent}</div>
-      <div>이미지</div>
+      <div className="today-question">{state.question.questionContent}</div>
+      <Link to={'/answer/'}>
+        <img src={introImg} alt="intro" width="100%" />
+      </Link>
     </div>
+  );
+};
+
+const Intro = () => {
+  return (
+    <QuestionProvider>
+      <IntroQuestion />
+    </QuestionProvider>
   );
 };
 export default Intro;
