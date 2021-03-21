@@ -1,6 +1,5 @@
 import { Switch, Route, withRouter } from 'react-router-dom';
 import { useState } from 'react';
-
 import Add from './components/answer/Add';
 import Edit from './components/answer/Edit';
 import List from './components/answer/List';
@@ -50,6 +49,13 @@ const App = ({ history }) => {
           <SignUp handleSignOutSuccess={handleSignOutSuccess} />
         </Route>
         <Route exact path="/test/modal" component={TestModal} />
+        <Route exact path="/answer/:answerId" component={Read} />
+        <Route exact path="/answer/" component={List} />
+        <Route
+          exact
+          path={['/answer/add', '/answer/:answerId/edit']}
+          component={List}
+        />
         <Route exact path="/users">
           <MyPage handleDelete={handleDelete} />
         </Route>
