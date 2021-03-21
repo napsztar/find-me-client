@@ -1,5 +1,4 @@
 import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
-
 import Add from './components/answer/Add';
 import Edit from './components/answer/Edit';
 import List from './components/answer/List';
@@ -16,7 +15,7 @@ import Intro from './components/Intro';
 //Switch 안에 계속 추가해서 설정하면 된다.
 const App = ({ history }) => {
   const [signinStatus, setSigninstauts] = useState({
-    isSignin: true,
+    isSignin: false,
     userInfo: null,
   });
 
@@ -58,6 +57,13 @@ const App = ({ history }) => {
         </Route>
         <Route exact path="/users/signup" component={SignUp} />
         <Route exact path="/test/modal" component={TestModal} />
+        <Route exact path="/answer/:answerId" component={Read} />
+        <Route exact path="/answer/" component={List} />
+        <Route
+          exact
+          path={['/answer/add', '/answer/:answerId/edit']}
+          component={List}
+        />
         <Route exact path="/users">
           <MyPage handleDelete={handleDelete} />
         </Route>
