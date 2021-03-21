@@ -10,11 +10,13 @@ import SignUp from './components/user/Signup';
 import MyPage from './components/user/Mypage';
 import axios from 'axios';
 import { useState } from 'react';
+import TestModal from './components/test/TestModal';
+import Intro from './components/Intro';
 
 //Switch 안에 계속 추가해서 설정하면 된다.
 const App = ({ history }) => {
   const [signinStatus, setSigninstauts] = useState({
-    isSignin: false,
+    isSignin: true,
     userInfo: null,
   });
 
@@ -44,20 +46,18 @@ const App = ({ history }) => {
     //.then(res => console.log(res));
   };
 
-  return (
+
+  //이미 로그인 상태라면 리다이렉트
+  return isSignin ? (
+    <Intro />
+  ) : (
     <div>
       <Switch>
-        <Route exact path="/">
-          {isSignin ? (
-            <Redirect to="/intro" />
-          ) : (
-            <Redirect to="/users/signin" />
-          )}
-        </Route>
-        <Route path="/users/signin">
-          <SignIn handleSigninSuccess={handleSigninSuccess} />
+         <Route exact path="/">
+          <Signin handleSigninSuccess={handleSigninSuccess} />
         </Route>
         <Route exact path="/users/signup" component={SignUp} />
+        <Route exact path="/test/modal" component={TestModal} />
         <Route exact path="/users">
           <MyPage handleDelete={handleDelete} />
         </Route>

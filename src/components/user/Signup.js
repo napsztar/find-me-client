@@ -32,7 +32,7 @@ const SignUp = ({ history }) => {
     } else {
       axios
         .post(
-          'http://localhost:5000/users/signup',
+          `${process.env.REACT_APP_SERVER_HOST}/users/signup`,
           {
             email: email,
             nickname: nickname,
