@@ -10,7 +10,7 @@ const Intro = () => {
       setLoading(true);
       try {
         const response = await axios.post(
-          `${process.env.REACT_APP_SERVER_HOST}/question`,
+          `${process.env.REACT_APP_SERVER_HOST}/intro`,
           {},
           { 'Content-Type': 'application/json' },
         );
