@@ -2,13 +2,13 @@ import React, { useEffect, useContext } from 'react';
 import axios from 'axios';
 import logo from '../image/logo.png';
 import introImg from '../image/intro.jpg';
-import QuestionContext, { QuestionProvider } from '../contexts/question';
+import QuestionContext from '../contexts/question';
 import { equalsDate, isEmptyObject } from '../utils/common';
 import { Link } from 'react-router-dom';
 import FloatingButton from '../utils/FloatingButton';
 import { MdModeEdit } from 'react-icons/md';
 
-const IntroQuestion = () => {
+const Intro = () => {
   const { state, actions } = useContext(QuestionContext);
   useEffect(() => {
     if (
@@ -56,11 +56,4 @@ const IntroQuestion = () => {
   );
 };
 
-const Intro = () => {
-  return (
-    <QuestionProvider>
-      <IntroQuestion />
-    </QuestionProvider>
-  );
-};
 export default Intro;
