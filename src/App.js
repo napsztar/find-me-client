@@ -1,5 +1,4 @@
 import { Switch, Route, withRouter } from 'react-router-dom';
-
 import Add from './components/answer/Add';
 import Edit from './components/answer/Edit';
 import List from './components/answer/List';
@@ -11,11 +10,12 @@ import Mypage from './components/user/Mypage';
 import axios from 'axios';
 import { useState } from 'react';
 import TestModal from './components/test/TestModal';
+import Intro from './components/Intro';
 
 //Switch 안에 계속 추가해서 설정하면 된다.
 const App = ({ history }) => {
   const [signinStatus, setSigninstauts] = useState({
-    isSignin: false,
+    isSignin: true,
     userInfo: null,
   });
 
@@ -49,7 +49,9 @@ const App = ({ history }) => {
   };
 
   //이미 로그인 상태라면 리다이렉트
-  return (
+  return isSignin ? (
+    <Intro />
+  ) : (
     <div>
       <Switch>
         <Route exact path="/">

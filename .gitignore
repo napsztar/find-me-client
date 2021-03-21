@@ -25,3 +25,7 @@ yarn-error.log*
 # IDE project folder
 .idea/
 .vscode/
+
+.env
+
+.package-lock.json

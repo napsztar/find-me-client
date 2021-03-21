@@ -35,6 +35,17 @@ input {
   align-items: center;
 }
 
+.intro {
+  text-align: center;
+
+  .title {
+    margin : 2em 3em;
+  }
+  .today-question {
+    margin : 2em 3em;
+  }
+}
+
 // 일단 하나만 쓸 예정이라서 modal로 했음
 .modal {
   display: none;
