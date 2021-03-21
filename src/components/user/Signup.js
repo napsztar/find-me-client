@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
-import '../header/Header';
-import '../../styles/main.scss';
 import Header from '../header/Header';
+import '../../styles/main.scss';
 
-const SignUp = ({ history }) => {
+const SignUp = ({ history, handleSignOutSuccess }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [inputs, setInputs] = useState({
     email: '',
-    nickname: '',
+    nickName: '',
     password: '',
     checkPassword: '',
   });
 
-  const { email, nickname, password, checkPassword } = inputs;
+  const { email, nickName, password, checkPassword } = inputs;
 
   const onChangeInput = e => {
     const { value, name } = e.target;
@@ -24,8 +23,8 @@ const SignUp = ({ history }) => {
     });
   };
 
-  const handleSignup = () => {
-    if (!email || !nickname || !password || !checkPassword) {
+  const handleSignUp = () => {
+    if (!email || !nickName || !password || !checkPassword) {
       setErrorMessage('모든 항목을 입력해주세요');
     } else if (password !== checkPassword) {
       setErrorMessage('비밀번호가 일치하지 않습니다');
@@ -35,7 +34,7 @@ const SignUp = ({ history }) => {
           `${process.env.REACT_APP_SERVER_HOST}/users/signup`,
           {
             email: email,
-            nickname: nickname,
+            nickname: nickName,
             password: password,
           },
           { 'Content-Type': 'application/json' },
@@ -43,7 +42,7 @@ const SignUp = ({ history }) => {
         .then(() => history.push('/'))
         .catch(err => {
           err.response.status === 409
-            ? alert('이미 존재하는 회원입니다.')
+            ? setErrorMessage('이미 존재하는 회원입니다.')
             : alert(err);
         });
     }
@@ -51,52 +50,52 @@ const SignUp = ({ history }) => {
 
   return (
     <div className="container">
-      <Header />
+      <Header handleSignOutSuccess={handleSignOutSuccess} />
       <div className="userinfo-container">
         <form onSubmit={e => e.preventDefault()}>
           <div>
             <span>Email</span>
             <input
               type="email"
-              onChange={onChangeInput}
               name="email"
               value={email}
+              onChange={onChangeInput}
             ></input>
           </div>
           <div>
             <span>Nickname</span>
             <input
-              type="nickname"
+              type="nickName"
+              name="nickName"
+              value={nickName}
               onChange={onChangeInput}
-              name="nickname"
-              value={nickname}
             ></input>
           </div>
           <div>
             <span>Password</span>
             <input
               type="password"
-              onChange={onChangeInput}
               name="password"
               value={password}
+              onChange={onChangeInput}
             ></input>
           </div>
           <div>
             <span>Check Password</span>
             <input
               type="password"
-              onChange={onChangeInput}
               name="checkPassword"
               value={checkPassword}
+              onChange={onChangeInput}
             ></input>
           </div>
         </form>
       </div>
       <div className="signup-btn">
         {errorMessage === '' ? null : (
-          <div className="message-box">{errorMessage}</div>
+          <div className="error-box">{errorMessage}</div>
         )}
-        <button onClick={handleSignup}>Signup</button>
+        <button onClick={handleSignUp}>가입하기</button>
       </div>
     </div>
   );
