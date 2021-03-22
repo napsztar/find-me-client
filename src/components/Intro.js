@@ -1,14 +1,15 @@
 import React, { useEffect, useContext } from 'react';
 import axios from 'axios';
 import logo from '../image/logo.png';
-import introImg from '../image/intro.jpg';
-import QuestionContext, { QuestionProvider } from '../contexts/question';
+//import introImg from '../image/intro.jpg';
+import gold from '../image/gold-image.png';
+import QuestionContext from '../contexts/question';
 import { equalsDate, isEmptyObject } from '../utils/common';
 import { Link } from 'react-router-dom';
 import FloatingButton from '../utils/FloatingButton';
 import { MdModeEdit } from 'react-icons/md';
 
-const IntroQuestion = () => {
+const Intro = () => {
   const { state, actions } = useContext(QuestionContext);
   useEffect(() => {
     if (
@@ -49,18 +50,11 @@ const IntroQuestion = () => {
       <div className="title">Today's carrot question</div>
       <div className="today-question">{state.question.questionContent}</div>
       <Link to={'/answer/'}>
-        <img src={introImg} alt="intro" width="100%" />
+        <img src={gold} alt="gold" width="250px" height="285px" />
       </Link>
       <FloatingButton children={<MdModeEdit size={25} />} to="/answer/add" />
     </div>
   );
 };
 
-const Intro = () => {
-  return (
-    <QuestionProvider>
-      <IntroQuestion />
-    </QuestionProvider>
-  );
-};
 export default Intro;

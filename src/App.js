@@ -11,6 +11,7 @@ import SignUp from './components/user/Signup';
 import MyPage from './components/user/Mypage';
 import TestModal from './components/test/TestModal';
 import Intro from './components/Intro';
+import { QuestionProvider } from './contexts/question';
 
 const App = ({ history }) => {
   const [signInStatus, setSignInStatus] = useState({
@@ -42,23 +43,25 @@ const App = ({ history }) => {
     <Intro />
   ) : (
     <div>
-      <Switch>
-        <Route exact path="/">
-          <SignIn handleSignInSuccess={handleSignInSuccess} />
-        </Route>
-        <Route exact path="/users/signup">
-          <SignUp handleSignOutSuccess={handleSignOutSuccess} />
-        </Route>
-        <Route exact path="/test/modal" component={TestModal} />
-        <Route exact path="/intro" component={Intro} />
-        <Route exact path="/answer/" component={List} />
-        <Route exact path="/answer/add" component={Add} />
-        <Route exact path="/answer/:answerId/edit" component={Edit} />
-        {/*<Route exact path="/answer/:answerId" component={Read} />*/}
-        <Route exact path="/users">
-          <MyPage handleDelete={handleDelete} />
-        </Route>
-      </Switch>
+      <QuestionProvider>
+        <Switch>
+          <Route exact path="/">
+            <SignIn handleSignInSuccess={handleSignInSuccess} />
+          </Route>
+          <Route exact path="/users/signup">
+            <SignUp handleSignOutSuccess={handleSignOutSuccess} />
+          </Route>
+          <Route exact path="/test/modal" component={TestModal} />
+          <Route exact path="/intro" component={Intro} />
+          <Route exact path="/answer/" component={List} />
+          <Route exact path="/answer/add" component={Add} />
+          <Route exact path="/answer/:answerId/edit" component={Edit} />
+          <Route exact path="/answer/:answerId" component={Read} />
+          <Route exact path="/users">
+            <MyPage handleDelete={handleDelete} />
+          </Route>
+        </Switch>
+      </QuestionProvider>
     </div>
   );
 };
