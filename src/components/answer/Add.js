@@ -6,7 +6,7 @@ import { equalsDate, isEmptyObject } from '../../utils/common';
 import axios from 'axios';
 import Modal from '../../utils/Modal';
 
-const Add = () => {
+const Add = ({ history }) => {
   const { state, actions } = useContext(QuestionContext);
   const [answerContent, setAnswerContent] = useState('');
   const [isModalDisplay, setIsModalDisplay] = useState(false);
@@ -24,7 +24,15 @@ const Add = () => {
             { answerId: state.question.answerId, answerContent: answerContent },
             { 'Content-Type': 'application/json' },
           );
-          setIsModalDisplay(response.data.message === 'Success');
+
+          // 로그인이 안 되어 있으면 페이지로 보내기
+          if (response.data.message) {
+            if (response.data.message === 'invalid access token') {
+              // history.push('/');
+            } else if (response.data.message === 'Success') {
+              setIsModalDisplay(true);
+            }
+          }
         } catch (e) {
           console.log(e);
         }
@@ -34,10 +42,7 @@ const Add = () => {
   };
 
   useEffect(() => {
-    if (
-      isEmptyObject(state.question) ||
-      !equalsDate(state.question.questionAt)
-    ) {
+    if (isEmptyObject(state.question)) {
       (async () => {
         actions.setLoading(true);
         try {
@@ -65,9 +70,10 @@ const Add = () => {
     return null;
   }
   return (
-    <div className="container">
+    <div className="container add">
       <div className="content">
-        <div>{state.question.questionContent}</div>
+        <Header />
+        <div className="add-question">{state.question.questionContent}</div>
         <textarea
           placeholder={'일기를 써주세요'}
           onChange={e => {
