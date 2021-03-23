@@ -22,7 +22,7 @@ const Edit = ({ location }) => {
           const response = await axios.post(
             `${process.env.REACT_APP_SERVER_HOST}/answer/edit`,
             { answerId: answer.answerId, answerContent: editAnswer },
-            { 'Content-Type': 'application/json' },
+            { 'Content-Type': 'application/json', withCredentials: true },
           );
           console.log(response);
           setIsModalDisplay(true);

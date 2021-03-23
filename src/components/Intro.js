@@ -21,7 +21,7 @@ const Intro = () => {
           const response = await axios.post(
             `${process.env.REACT_APP_SERVER_HOST}/intro`,
             {},
-            { 'Content-Type': 'application/json' },
+            { 'Content-Type': 'application/json', withCredentials: true },
           );
           console.log(response.data);
 

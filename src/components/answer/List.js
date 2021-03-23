@@ -24,9 +24,9 @@ const List = () => {
       setLoading(true);
       try {
         const response = await axios.post(
-          'http://localhost:5000/answer',
+          `${process.env.REACT_APP_SERVER_HOST}/answer`,
           {},
-          { 'Content-Type': 'application/json' },
+          { 'Content-Type': 'application/json', withCredentials: true },
         );
         setQuestions(response.data);
       } catch (e) {

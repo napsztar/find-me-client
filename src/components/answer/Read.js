@@ -12,11 +12,10 @@ const Read = ({ match, history }) => {
       setLoading(true);
       try {
         const response = await axios.post(
-          'http://localhost:5000/answer/read',
+          `${process.env.REACT_APP_SERVER_HOST}/answer/read`,
           { answerId: answerId },
-          { 'Content-Type': 'application/json' },
+          { 'Content-Type': 'application/json', withCredentials: true },
         );
-        console.log('qwer', response.data);
         setAnswer(response.data);
       } catch (e) {
         console.log(e);
