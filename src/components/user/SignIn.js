@@ -1,14 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import axios from 'axios';
 import logo from '../../image/logo.png';
 import '../../styles/user.scss';
 
-const SignIn = ({ signInSuccess, socialLoginHandler, history }) => {
+const SignIn = ({ isSigned, signInSuccess, socialLoginHandler, history }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+
+  useEffect(() => {
+    if (isSigned) {
+      history.push('/intro');
+    }
+  });
 
   const onChangeEmail = e => {
     setEmail(e.target.value);
@@ -29,7 +35,7 @@ const SignIn = ({ signInSuccess, socialLoginHandler, history }) => {
             email: email,
             password: password,
           },
-          { 'Content-Type': 'application/json' },
+          { 'Content-Type': 'application/json', withCredentials: true },
         )
         .then(() => signInSuccess(), history.push('/intro'))
         .catch(err => {

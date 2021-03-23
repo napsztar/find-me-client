@@ -55,49 +55,24 @@ body {
       text-decoration: none;
     }
 
-.add{
-  text-align: center;
-  .add-question{
-    margin: 2em 4em;
-  }
-  textarea{
-    width: 100%;
-    height: 200px;
-    padding: 10px;
-    box-sizing: border-box;
-    border: solid 3px #552a04;
-    border-radius: 5px;
-    font-size: 16px;
-    resize: both;
-    background: bisque;
-  }
-}
+    .add {
+      text-align: center;
+      .add-question {
+        margin: 2em 4em;
+      }
+      textarea {
+        width: 100%;
+        height: 200px;
+        padding: 10px;
+        box-sizing: border-box;
+        border: solid 3px #552a04;
+        border-radius: 5px;
+        font-size: 16px;
+        resize: both;
+        background: bisque;
+      }
+    }
 
-// 일단 하나만 쓸 예정이라서 modal로 했음
-.modal {
-  display: none;
-  position:relative;
-  width:100%;
-  height:100%;
-  z-index:1;
-  p {
-    margin-top: 20px;
-    margin-bottom: 20px;
-  }
-  button {
-     display:inline-block;
-     width:50px;
-     margin-left:calc(100% - 100px - 10px);
-   }
-  .modal_content {
-    width:300px;
-    margin:100px auto;
-    padding:20px 10px;
-    background:#fff;
-    border:2px solid #666;
-    text-align: center;
-  }
-  
     // 일단 하나만 쓸 예정이라서 modal로 했음
     .modal {
       display: none;
@@ -123,39 +98,64 @@ body {
         text-align: center;
       }
 
-      .modal_layer {
-        position: fixed;
-        top: 0;
-        left: 0;
+      // 일단 하나만 쓸 예정이라서 modal로 했음
+      .modal {
+        display: none;
+        position: relative;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: -1;
+        z-index: 1;
+        p {
+          margin-top: 20px;
+          margin-bottom: 20px;
+        }
+        button {
+          display: inline-block;
+          width: 50px;
+          margin-left: calc(100% - 100px - 10px);
+        }
+        .modal_content {
+          width: 300px;
+          margin: 100px auto;
+          padding: 20px 10px;
+          background: #fff;
+          border: 2px solid #666;
+          text-align: center;
+        }
+
+        .modal_layer {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.5);
+          z-index: -1;
+        }
       }
+
+      //   .title {
+      //     margin: 2em 3em;
+      //     font-family: 'PT Serif', serif;
+      //   }
+      //   .today-question {
+      //     margin: 2em 3em;
+      //   }
+      // }
+
+      //   .floating-button {
+      //     position: fixed;
+      //     width: 40px;
+      //     height: 40px;
+      //     bottom: 40px;
+      //     margin-left: 310px;
+      //     background-color: #964b00;
+      //     color: #fff;
+      //     border-radius: 50px;
+      //     box-shadow: 1.5px 1px 2px #999;
+      //     padding-top: 6px;
+      //   }
+      // }
     }
-  
-    //   .title {
-    //     margin: 2em 3em;
-    //     font-family: 'PT Serif', serif;
-    //   }
-    //   .today-question {
-    //     margin: 2em 3em;
-    //   }
-    // }
-
-    //   .floating-button {
-    //     position: fixed;
-    //     width: 40px;
-    //     height: 40px;
-    //     bottom: 40px;
-    //     margin-left: 310px;
-    //     background-color: #964b00;
-    //     color: #fff;
-    //     border-radius: 50px;
-    //     box-shadow: 1.5px 1px 2px #999;
-    //     padding-top: 6px;
-    //   }
-    // }
-
   }
 }

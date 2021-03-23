@@ -37,7 +37,7 @@ const SignUp = ({ history, signOutComplete }) => {
             nickname: nickName,
             password: password,
           },
-          { 'Content-Type': 'application/json' },
+          { 'Content-Type': 'application/json', withCredentials: true },
         )
         .then(() => history.push('/'))
         .catch(err => {
