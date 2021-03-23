@@ -4,7 +4,7 @@ import axios from 'axios';
 import Header from '../header/Header';
 import '../../styles/main.scss';
 
-const SignUp = ({ history, handleSignOutSuccess }) => {
+const SignUp = ({ history, signOutComplete }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [inputs, setInputs] = useState({
     email: '',
@@ -50,7 +50,7 @@ const SignUp = ({ history, handleSignOutSuccess }) => {
 
   return (
     <div className="container">
-      <Header handleSignOutSuccess={handleSignOutSuccess} />
+      <Header signOutComplete={signOutComplete} />
       <div className="userinfo-container">
         <form onSubmit={e => e.preventDefault()}>
           <div>

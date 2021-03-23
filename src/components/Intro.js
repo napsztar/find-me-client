@@ -1,8 +1,8 @@
 import React, { useEffect, useContext } from 'react';
 import axios from 'axios';
 import logo from '../image/logo.png';
-//import introImg from '../image/intro.jpg';
-import gold from '../image/gold-image.png';
+import introImg from '../image/CARROT-main-image.png';
+import QuestionContext, { QuestionProvider } from '../contexts/question';
 import QuestionContext from '../contexts/question';
 import { equalsDate, isEmptyObject } from '../utils/common';
 import { Link } from 'react-router-dom';

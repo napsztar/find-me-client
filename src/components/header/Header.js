@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { BiBookHeart } from 'react-icons/bi';
 import { BsFillPersonFill } from 'react-icons/bs';
 import axios from 'axios';
 import logo from '../../image/logo.png';
 import '../../styles/main.scss';
 
-const Header = ({ handleSignOutSuccess }) => {
+const Header = ({ signOutComplete, history }) => {
   const [isToggleOn, setToggleOn] = useState(false);
 
   const handleToggle = () => {
@@ -18,29 +18,32 @@ const Header = ({ handleSignOutSuccess }) => {
       .post(`${process.env.REACT_APP_SERVER_HOST}/users/signout`, {
         'Content-Type': 'application/json',
       })
-      .then(() => handleSignOutSuccess());
+      .then(() => signOutComplete());
   };
 
   return (
-    <div className="header-container">
+    <div className="container">
       <header>
-        <div className="logo-container">
-          <img src={logo} alt="logo" width="90px" height="100px"></img>
-        </div>
-        <div className="header-list">
-          <button>
+        <span>
+          <img src={logo} alt="logo" width="300px" height="95px"></img>
+        </span>
+        <div>
+          <div>
             <Link to="/intro">
-              <BiBookHeart size="25" />
+              <BiBookHeart size="30" />
             </Link>
-          </button>
-          <button onClick={() => handleToggle()}>
-            <BsFillPersonFill size="25" />
-          </button>
-          <div style={{ display: isToggleOn ? 'block' : 'none' }}>
-            <Link to="/">마이페이지</Link>
+          </div>
+          <div className="toggle" onClick={() => handleToggle()}>
+            <BsFillPersonFill size="30" />
           </div>
           <div style={{ display: isToggleOn ? 'block' : 'none' }}>
-            <button onClick={handleSignOut}>로그아웃</button>
+            <Link to="/users">마이페이지</Link>
+          </div>
+          <div
+            style={{ display: isToggleOn ? 'block' : 'none' }}
+            onClick={handleSignOut}
+          >
+            로그아웃
           </div>
         </div>
       </header>
@@ -48,4 +51,4 @@ const Header = ({ handleSignOutSuccess }) => {
   );
 };
 
-export default Header;
+export default withRouter(Header);

@@ -1,64 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&family=Noto+Serif+KR:wght@200&family=PT+Serif&display=swap');
+
 * {
   box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 body {
-  background: white;
-}
-
-img {
-  display: flex;
-  text-align: center;
+  font-family: 'PT Serif', serif;
+  background: #aa947e;
 }
 
 .container {
   display: flex;
   flex-direction: column;
+  max-width: 900px;
+  min-width: 375px;
   width: 100%;
-  //height: 100%;
-  max-width: 375px; // width: 375px;
+  height: 100vh;
   margin-left: auto;
   margin-right: auto;
-  background: lightgrey; // TODO : 작업 색상 구분용 추후 변경 필요
-  height: 800px; // TODO : 작업용 크기 추후 변경 필요
-  //   .content {
-  //   margin: 0 20px;
-  // }
-
-  .floating-button{
-    text-align: center;
-    position:fixed;
-    width:40px;
-    height:40px;
-    bottom:40px;
-    margin-left: 310px;
-    background-color:#964b00;
-    color:#FFF;
-    border-radius:50px;
-    box-shadow: 1.5px 1px 2px #999;
-    padding-top: 6px;
-  }
-}
-
-input {
-  display: flex;
-  border: none;
-  width: 20em;
-  height: 2em;
-  margin: 2em 3em;
+  background-image: url('../image/paper_texture.jpg');
+  background-size: cover;
   align-items: center;
-}
+  cursor: pointer;
 
-.intro {
-  text-align: center;
+  header {
+    display: flex;
+    justify-content: space-between;
+    flex: 1 1 auto;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    text-align: center;
+    align-items: center;
+    text-decoration: none;
 
-  .title {
-    margin : 2em 3em;
-  }
-  .today-question {
-    margin : 2em 3em;
-  }
-}
+    img {
+      display: flex;
+      flex: 2 2 auto;
+      flex-wrap: nowrap;
+      margin: 1em 10em 1em 20em;
+    }
+
+    div {
+      display: flex;
+      flex: 1 1 auto;
+      text-decoration: none;
+      text-align: center;
+      list-style: none;
+    }
+
+    :link {
+      display: flex;
+      text-decoration: none;
+    }
 
 .add{
   text-align: center;
@@ -102,26 +97,65 @@ input {
     border:2px solid #666;
     text-align: center;
   }
+  
+    // 일단 하나만 쓸 예정이라서 modal로 했음
+    .modal {
+      display: none;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      p {
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+      button {
+        display: inline-block;
+        width: 50px;
+        margin-left: calc(100% - 100px - 10px);
+      }
+      .modal_content {
+        width: 300px;
+        margin: 100px auto;
+        padding: 20px 10px;
+        background: #fff;
+        border: 2px solid #666;
+        text-align: center;
+      }
 
-  .modal_layer {
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:rgba(0, 0, 0, 0.5);
-    z-index:-1;
+      .modal_layer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+      }
+    }
+  
+    //   .title {
+    //     margin: 2em 3em;
+    //     font-family: 'PT Serif', serif;
+    //   }
+    //   .today-question {
+    //     margin: 2em 3em;
+    //   }
+    // }
+
+    //   .floating-button {
+    //     position: fixed;
+    //     width: 40px;
+    //     height: 40px;
+    //     bottom: 40px;
+    //     margin-left: 310px;
+    //     background-color: #964b00;
+    //     color: #fff;
+    //     border-radius: 50px;
+    //     box-shadow: 1.5px 1px 2px #999;
+    //     padding-top: 6px;
+    //   }
+    // }
+
   }
-}
-
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 8px 12px;
-}
-
-:link {
-  display: flex;
-  text-decoration: none;
 }
