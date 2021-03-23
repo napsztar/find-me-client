@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { MdModeEdit } from 'react-icons/md';
 import FloatingButton from '../../utils/FloatingButton';
 import { isEmptyObject } from '../../utils/common';
+import Header from '../header/Header';
 
 const ListItem = ({ question }) => {
   return (
@@ -44,6 +45,7 @@ const List = () => {
   }
   return (
     <div className="container list">
+      <Header />
       <div className="content">
         {questions.map(question => (
           <ListItem question={question} key={question.answerId} />
