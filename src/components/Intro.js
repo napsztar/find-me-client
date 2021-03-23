@@ -23,7 +23,6 @@ const Intro = () => {
             {},
             { 'Content-Type': 'application/json', withCredentials: true },
           );
-          console.log(response.data);
 
           actions.setQuestion(response.data);
         } catch (e) {

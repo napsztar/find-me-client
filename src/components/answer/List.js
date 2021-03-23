@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { MdModeEdit } from 'react-icons/md';
 import FloatingButton from '../../utils/FloatingButton';
+import { isEmptyObject } from '../../utils/common';
 
 const ListItem = ({ question }) => {
   return (
@@ -17,7 +18,7 @@ const ListItem = ({ question }) => {
 };
 
 const List = () => {
-  const [questions, setQuestions] = useState(null);
+  const [questions, setQuestions] = useState({});
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     (async () => {
@@ -38,7 +39,7 @@ const List = () => {
   if (loading) {
     return <div>대기 중...</div>;
   }
-  if (!questions) {
+  if (isEmptyObject(questions)) {
     return <div>죄송합니다. 오류가 발생하였습니다.</div>;
   }
   return (

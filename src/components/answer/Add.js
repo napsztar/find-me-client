@@ -66,7 +66,7 @@ const Add = ({ history }) => {
   if (state.loading) {
     return <div>loading...</div>;
   }
-  if (!state.question) {
+  if (isEmptyObject(state.question)) {
     return null;
   }
   return (
