@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { MdModeEdit } from 'react-icons/md';
 import FloatingButton from '../../utils/FloatingButton';
+import { isEmptyObject } from '../../utils/common';
 
 const ListItem = ({ question }) => {
   return (
@@ -17,16 +18,16 @@ const ListItem = ({ question }) => {
 };
 
 const List = () => {
-  const [questions, setQuestions] = useState(null);
+  const [questions, setQuestions] = useState({});
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     (async () => {
       setLoading(true);
       try {
         const response = await axios.post(
-          'http://localhost:5000/answer',
+          `${process.env.REACT_APP_SERVER_HOST}/answer`,
           {},
-          { 'Content-Type': 'application/json' },
+          { 'Content-Type': 'application/json', withCredentials: true },
         );
         setQuestions(response.data);
       } catch (e) {
@@ -38,7 +39,7 @@ const List = () => {
   if (loading) {
     return <div>대기 중...</div>;
   }
-  if (!questions) {
+  if (isEmptyObject(questions)) {
     return <div>죄송합니다. 오류가 발생하였습니다.</div>;
   }
   return (

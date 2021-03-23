@@ -22,7 +22,7 @@ const Add = ({ history }) => {
           const response = await axios.post(
             `${process.env.REACT_APP_SERVER_HOST}/answer/add`,
             { answerId: state.question.answerId, answerContent: answerContent },
-            { 'Content-Type': 'application/json' },
+            { 'Content-Type': 'application/json', withCredentials: true },
           );
 
           // 로그인이 안 되어 있으면 페이지로 보내기
@@ -49,7 +49,7 @@ const Add = ({ history }) => {
           const response = await axios.post(
             `${process.env.REACT_APP_SERVER_HOST}/intro`,
             {},
-            { 'Content-Type': 'application/json' },
+            { 'Content-Type': 'application/json', withCredentials: true },
           );
           actions.setQuestion(response.data);
         } catch (e) {
@@ -66,7 +66,7 @@ const Add = ({ history }) => {
   if (state.loading) {
     return <div>loading...</div>;
   }
-  if (!state.question) {
+  if (isEmptyObject(state.question)) {
     return null;
   }
   return (

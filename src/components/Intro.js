@@ -21,8 +21,9 @@ const Intro = () => {
           const response = await axios.post(
             `${process.env.REACT_APP_SERVER_HOST}/intro`,
             {},
-            { 'Content-Type': 'application/json' },
+            { 'Content-Type': 'application/json', withCredentials: true },
           );
+
           actions.setQuestion(response.data);
         } catch (e) {
           console.log(e);
