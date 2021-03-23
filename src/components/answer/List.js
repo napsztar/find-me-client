@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import '../../styles/main.scss';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { MdModeEdit } from 'react-icons/md';
+import FloatingButton from '../../utils/FloatingButton';
 
 const ListItem = ({ question }) => {
   return (
@@ -37,7 +39,7 @@ const List = () => {
     return <div>대기 중...</div>;
   }
   if (!questions) {
-    return null;
+    return <div>죄송합니다. 오류가 발생하였습니다.</div>;
   }
   return (
     <div className="container">
@@ -46,6 +48,7 @@ const List = () => {
           <ListItem question={question} key={question.answerId} />
         ))}
       </div>
+      <FloatingButton children={<MdModeEdit size={25} />} to="/answer/add" />
     </div>
   );
 };

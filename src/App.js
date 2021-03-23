@@ -12,6 +12,7 @@ import MyPage from './components/user/Mypage';
 import TestModal from './components/test/TestModal';
 import Intro from './components/Intro';
 import axios from 'axios';
+import { QuestionProvider } from './contexts/question';
 
 const App = ({ history, location }) => {
   const [isSigned, setIsSigned] = useState(false);
@@ -56,6 +57,7 @@ const App = ({ history, location }) => {
     <Intro />
   ) : (
     <div>
+     <QuestionProvider>
       <Switch>
         <Route exact path="/">
           <SignIn
@@ -76,6 +78,7 @@ const App = ({ history, location }) => {
           <MyPage signOutComplete={signOutComplete} />
         </Route>
       </Switch>
+      </QuestionProvider>
     </div>
   );
 };

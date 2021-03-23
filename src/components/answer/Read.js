@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-const Read = ({ match }) => {
+import { Link } from 'react-router-dom';
+import Edit from './Edit';
+const Read = ({ match, history }) => {
   const { answerId } = match.params;
   const [loading, setLoading] = useState(false);
   const [answer, setAnswer] = useState({});
+
   useEffect(() => {
     (async () => {
       setLoading(true);
@@ -13,6 +16,7 @@ const Read = ({ match }) => {
           { answerId: answerId },
           { 'Content-Type': 'application/json' },
         );
+        console.log('qwer', response.data);
         setAnswer(response.data);
       } catch (e) {
         console.log(e);
@@ -25,16 +29,27 @@ const Read = ({ match }) => {
   }
   if (!answer) {
     return null;
-  }
-  return (
-    <div>
-      <div>오늘의 질문?{answer.questionContent}</div>
-      <div>오늘의 질문 날짜{answer.questionAt}</div>
-      <div>내가 쓴 답변{answer.answerContent}</div>
+  } else {
+    return (
       <div>
-        최근 작성일 : {answer.updatedAt ? answer.updatedAt : answer.createdAt}
+        <div>오늘의 질문?{answer.questionContent}</div>
+        <div>오늘의 질문 날짜{answer.questionAt}</div>
+        <div>내가 쓴 답변{answer.answerContent}</div>
+        <div>
+          최근 작성일 : {answer.updatedAt ? answer.updatedAt : answer.createdAt}
+        </div>
+        <button
+          onClick={() => {
+            history.push({
+              pathname: `/answer/${answerId}/edit`,
+              state: { answer: answer },
+            });
+          }}
+        >
+          수정
+        </button>
       </div>
-    </div>
-  );
+    );
+  }
 };
 export default Read;
