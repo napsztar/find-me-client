@@ -3,18 +3,18 @@ import { Link, withRouter } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import axios from 'axios';
 import logo from '../../image/logo.png';
-import '../../styles/main.scss';
+import '../../styles/user.scss';
 
-const SignIn = ({ isSignIn, handleSignInSuccess, history }) => {
-  useEffect(() => {
-    if (isSignIn) {
-      history.push('/intro');
-    }
-  });
-
+const SignIn = ({ isSigned, signInSuccess, socialLoginHandler, history }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+
+  useEffect(() => {
+    if (isSigned) {
+      history.push('/intro');
+    }
+  });
 
   const onChangeEmail = e => {
     setEmail(e.target.value);
@@ -35,9 +35,9 @@ const SignIn = ({ isSignIn, handleSignInSuccess, history }) => {
             email: email,
             password: password,
           },
-          { 'Content-Type': 'application/json' },
+          { 'Content-Type': 'application/json', withCredentials: true },
         )
-        .then(res => handleSignInSuccess(res.data))
+        .then(() => signInSuccess(), history.push('/intro'))
         .catch(err => {
           err.response.status === 401
             ? setErrorMessage('일치하는 정보가 없습니다.')
@@ -49,7 +49,7 @@ const SignIn = ({ isSignIn, handleSignInSuccess, history }) => {
   return (
     <div className="container">
       <div className="logo-container">
-        <img src={logo} alt="logo" width="380px" height="400px"></img>
+        <img src={logo} alt="logo" width="90%" height="230px"></img>
       </div>
       <form onSubmit={e => e.preventDefault()}>
         <div className="email-container">
@@ -57,7 +57,7 @@ const SignIn = ({ isSignIn, handleSignInSuccess, history }) => {
             type="email"
             name="email"
             value={email}
-            placeholder="email"
+            placeholder="Write your Email"
             onChange={onChangeEmail}
           ></input>
         </div>
@@ -66,7 +66,7 @@ const SignIn = ({ isSignIn, handleSignInSuccess, history }) => {
             type="password"
             name="password"
             value={password}
-            placeholder="password"
+            placeholder="Write your password"
             onChange={onChangePassword}
           ></input>
         </div>
@@ -80,14 +80,14 @@ const SignIn = ({ isSignIn, handleSignInSuccess, history }) => {
         </div>
       </form>
       <div className="social-container">
-        <span className="social-signin">
+        <button className="social-signin" onClick={socialLoginHandler}>
           <FcGoogle size="30" />
-          <Link to="/">소셜페이지</Link>
-        </span>
-      </div>
-      <div className="signup-info-container">
-        <span className="signup-info">계정이 없으신가요?</span>
-        <Link to="/users/signup">가입하기</Link>
+          <span>Google 계정으로 로그인</span>
+        </button>
+        <button className="signup-info-container">
+          <span className="signup-info">계정이 없으신가요?</span>
+          <Link to="/users/signup">가입하기</Link>
+        </button>
       </div>
     </div>
   );
