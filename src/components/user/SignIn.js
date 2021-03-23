@@ -79,13 +79,15 @@ const SignIn = ({ isSigned, signInSuccess, socialLoginHandler, history }) => {
           </button>
         </div>
       </form>
+      <hr />
+
       <div className="social-container">
         <button className="social-signin" onClick={socialLoginHandler}>
-          <FcGoogle size="30" />
+          <FcGoogle size="25" />
           <span>Google 계정으로 로그인</span>
         </button>
         <button className="signup-info-container">
-          <span className="signup-info">계정이 없으신가요?</span>
+          <span className="blinking">계정이 없으신가요?</span>
           <Link to="/users/signup">가입하기</Link>
         </button>
       </div>
