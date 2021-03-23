@@ -1,16 +1,38 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../styles/main.scss';
 import Header from '../header/Header';
 import Modal from '../../utils/Modal';
 import axios from 'axios';
 import List from './List';
+import { isEmptyObject } from '../../utils/common';
 
-const Edit = ({ location }) => {
-  // TODO : question state context or redux 사용 고려.. (advanced)
-  const answer = location.state.answer;
-  const [editAnswer, setEditAnswer] = useState(answer.answerContent);
-  //console.log(answer);
+const Edit = ({ match }) => {
+  const answerId = match.params.answerId;
+  const [loading, setLoading] = useState(false);
+  const [answer, setAnswer] = useState({});
+  const [editAnswer, setEditAnswer] = useState('');
   const [isModalDisplay, setIsModalDisplay] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      setLoading(true);
+      try {
+        const response = await axios.post(
+          `${process.env.REACT_APP_SERVER_HOST}/answer/read`,
+          { answerId: answerId },
+          { 'Content-Type': 'application/json', withCredentials: true },
+        );
+        setAnswer(response.data);
+        setEditAnswer(answer.answerContent);
+      } catch (e) {
+        console.log(e);
+      }
+      setLoading(false);
+    })();
+  }, []);
+  if (loading) {
+    return <div>loading...</div>;
+  }
 
   const handleModalDisplay = value => {
     setIsModalDisplay(value);
@@ -24,7 +46,6 @@ const Edit = ({ location }) => {
             { answerId: answer.answerId, answerContent: editAnswer },
             { 'Content-Type': 'application/json', withCredentials: true },
           );
-          console.log(response);
           setIsModalDisplay(true);
         } catch (e) {
           console.log(e);
@@ -32,6 +53,9 @@ const Edit = ({ location }) => {
       })();
     }
   };
+  if (isEmptyObject(answer)) {
+    return null;
+  }
   return (
     <div className="container edit">
       <Header />
