@@ -6,7 +6,7 @@ import axios from 'axios';
 import logo from '../../image/logo.png';
 import '../../styles/main.scss';
 
-const Header = ({ signOutComplete, history }) => {
+const Header = ({ signOutComplete }) => {
   const [isToggleOn, setToggleOn] = useState(false);
 
   const handleToggle = () => {
@@ -17,6 +17,7 @@ const Header = ({ signOutComplete, history }) => {
     axios
       .post(`${process.env.REACT_APP_SERVER_HOST}/users/signout`, {
         'Content-Type': 'application/json',
+        withCredentials: true,
       })
       .then(() => signOutComplete());
   };

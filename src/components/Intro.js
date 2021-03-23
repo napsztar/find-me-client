@@ -3,7 +3,6 @@ import axios from 'axios';
 import logo from '../image/logo.png';
 import introImg from '../image/CARROT-main-image.png';
 import QuestionContext, { QuestionProvider } from '../contexts/question';
-import QuestionContext from '../contexts/question';
 import { equalsDate, isEmptyObject } from '../utils/common';
 import { Link } from 'react-router-dom';
 import FloatingButton from '../utils/FloatingButton';
@@ -50,7 +49,7 @@ const Intro = () => {
       <div className="title">Today's carrot question</div>
       <div className="today-question">{state.question.questionContent}</div>
       <Link to={'/answer/'}>
-        <img src={gold} alt="gold" width="250px" height="285px" />
+        <img src={introImg} alt="gold" width="250px" height="285px" />
       </Link>
       <FloatingButton children={<MdModeEdit size={25} />} to="/answer/add" />
     </div>

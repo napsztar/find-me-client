@@ -34,7 +34,7 @@ const MyPage = ({ handleSignOut }) => {
             nickname: nickName,
             password: changePassword,
           },
-          { 'Content-Type': 'application/json' },
+          { 'Content-Type': 'application/json', withCredentials: true },
         )
         .catch(err => console.log(err));
     }
