@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import '../../styles/main.scss';
 
-const MyPage = ({ handleDelete }) => {
+const MyPage = ({ handleSignOut }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [inputs, setInputs] = useState({
     email: '',
@@ -88,7 +88,7 @@ const MyPage = ({ handleDelete }) => {
             <button type="submit" onClick={handleChangePassword}>
               비밀번호 변경
             </button>
-            <button type="submit" onClick={handleDelete}>
+            <button type="submit" onClick={handleSignOut}>
               회원탈퇴
             </button>
           </div>
