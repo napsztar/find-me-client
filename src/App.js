@@ -39,29 +39,28 @@ const App = ({ history }) => {
     history.push('/');
   };
 
-  return isSignIn ? (
-    <Intro />
-  ) : (
+  return (
     <div>
-      <QuestionProvider>
-        <Switch>
-          <Route exact path="/">
-            <SignIn handleSignInSuccess={handleSignInSuccess} />
-          </Route>
-          <Route exact path="/users/signup">
-            <SignUp handleSignOutSuccess={handleSignOutSuccess} />
-          </Route>
-          <Route exact path="/test/modal" component={TestModal} />
-          <Route exact path="/intro" component={Intro} />
-          <Route exact path="/answer/" component={List} />
-          <Route exact path="/answer/add" component={Add} />
-          <Route exact path="/answer/:answerId/edit" component={Edit} />
-          <Route exact path="/answer/:answerId" component={Read} />
-          <Route exact path="/users">
-            <MyPage handleDelete={handleDelete} />
-          </Route>
-        </Switch>
-      </QuestionProvider>
+      <Switch>
+        <Route exact path="/">
+          <SignIn
+            isSignIn={isSignIn}
+            handleSignInSuccess={handleSignInSuccess}
+          />
+        </Route>
+        <Route exact path="/users/signup">
+          <SignUp handleSignOutSuccess={handleSignOutSuccess} />
+        </Route>
+        <Route exact path="/test/modal" component={TestModal} />
+        <Route exact path="/intro" component={Intro} />
+        <Route exact path="/answer/" component={List} />
+        <Route exact path="/answer/add" component={Add} />
+        <Route exact path="/answer/:answerId/edit" component={Edit} />
+        <Route exact path="/answer/:answerId" component={Read} />
+        <Route exact path="/users">
+          <MyPage handleDelete={handleDelete} />
+        </Route>
+      </Switch>
     </div>
   );
 };

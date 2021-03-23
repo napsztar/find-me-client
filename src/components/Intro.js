@@ -24,6 +24,8 @@ const Intro = () => {
             {},
             { 'Content-Type': 'application/json' },
           );
+          console.log(response.data);
+
           actions.setQuestion(response.data);
         } catch (e) {
           console.log(e);

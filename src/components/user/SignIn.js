@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import axios from 'axios';
 import logo from '../../image/logo.png';
 import '../../styles/main.scss';
 
-const SignIn = ({ handleSignInSuccess }) => {
+const SignIn = ({ isSignIn, handleSignInSuccess, history }) => {
+  useEffect(() => {
+    if (isSignIn) {
+      history.push('/intro');
+    }
+  });
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
