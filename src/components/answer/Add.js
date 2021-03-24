@@ -15,7 +15,15 @@ const Add = ({ history }) => {
   };
 
   const handleAddAnswer = () => {
-    if (answerContent !== '') {
+    if (answerContent === '' || !answerContent) {
+      return (
+        <Modal
+          isModalDisplay={isModalDisplay}
+          handleModalDisplay={handleModalDisplay}
+          message="일기를 작성해주세요."
+        />
+      );
+    } else {
       (async () => {
         actions.setLoading(true);
         try {
@@ -67,12 +75,11 @@ const Add = ({ history }) => {
     return <div>loading...</div>;
   }
   if (isEmptyObject(state.question)) {
-    return null;
+    return <div>죄송합니다. 오류가 발생하였습니다.</div>;
   }
   return (
-    <div className="container add">
+    <div className="add">
       <div className="content">
-        <Header />
         <div className="add-question">{state.question.questionContent}</div>
         <textarea
           placeholder={'일기를 써주세요'}

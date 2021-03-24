@@ -40,7 +40,7 @@ const Intro = () => {
     return <div>loading...</div>;
   }
   if (!state.question) {
-    return null;
+    return <div>죄송합니다. 오류가 발생하였습니다.</div>;
   }
   return (
     <div className="container intro">

@@ -49,35 +49,34 @@ const App = ({ history, location }) => {
           )
           .then(() => signInSuccess(), history.push('/intro'));
       }
+
       getAccessToken(authCode);
     }
   }, []);
 
   return (
     <div>
-      <QuestionProvider>
-        <Switch>
-          <Route exact path="/">
-            <SignIn
-              isSigned={isSigned}
-              signInSuccess={signInSuccess}
-              socialLoginHandler={socialLoginHandler}
-            />
-          </Route>
-          <Route exact path="/users/signup">
-            <SignUp signOutComplete={signOutComplete} />
-          </Route>
-          <Route exact path="/test/modal" component={TestModal} />
-          <Route exact path="/intro" component={Intro} />
-          <Route exact path="/answer/" component={List} />
-          <Route exact path="/answer/add" component={Add} />
-          <Route exact path="/answer/:answerId/edit" component={Edit} />
-          <Route exact path="/answer/:answerId" component={Read} />
-          <Route exact path="/users">
-            <MyPage signOutComplete={signOutComplete} />
-          </Route>
-        </Switch>
-      </QuestionProvider>
+      <Switch>
+        <Route exact path="/">
+          <SignIn
+            isSigned={isSigned}
+            signInSuccess={signInSuccess}
+            socialLoginHandler={socialLoginHandler}
+          />
+        </Route>
+        <Route exact path="/users/signup">
+          <SignUp signOutComplete={signOutComplete} />
+        </Route>
+        <Route exact path="/test/modal" component={TestModal} />
+        <Route exact path="/intro" component={Intro} />
+        <Route exact path="/answer/" component={List} />
+        <Route exact path="/answer/add" component={Add} />
+        <Route exact path="/answer/:answerId/edit" component={Edit} />
+        <Route exact path="/answer/:answerId" component={Read} />
+        <Route exact path="/users">
+          <MyPage signOutComplete={signOutComplete} />
+        </Route>
+      </Switch>
     </div>
   );
 };

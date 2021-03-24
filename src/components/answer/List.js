@@ -5,15 +5,16 @@ import { Link } from 'react-router-dom';
 import { MdModeEdit } from 'react-icons/md';
 import FloatingButton from '../../utils/FloatingButton';
 import { isEmptyObject } from '../../utils/common';
+import Header from '../header/Header';
 
 const ListItem = ({ question }) => {
   return (
-    <div className="list-item">
-      <Link to={`/answer/${question.answerId}`}>
-        {' '}
-        {question.questionContent}
-      </Link>
-    </div>
+    <Link to={`/answer/${question.answerId}`}>
+      <div className="item">
+        <div className="thumbnail" />
+        <div className="question">{question.questionContent}</div>
+      </div>
+    </Link>
   );
 };
 
@@ -43,7 +44,8 @@ const List = () => {
     return <div>죄송합니다. 오류가 발생하였습니다.</div>;
   }
   return (
-    <div className="container">
+    <div className="container list">
+      <Header />
       <div className="content">
         {questions.map(question => (
           <ListItem question={question} key={question.answerId} />

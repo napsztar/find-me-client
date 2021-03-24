@@ -3,7 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import axios from 'axios';
 import logo from '../../image/logo.png';
-import '../../styles/user.scss';
+// import '../../styles/user.scss';
 
 const SignIn = ({ isSigned, signInSuccess, socialLoginHandler, history }) => {
   const [email, setEmail] = useState('');
