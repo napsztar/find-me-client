@@ -5,18 +5,17 @@ import axios from 'axios';
 import logo from '../../image/logo.png';
 import '../../styles/main.scss';
 import { store } from '../../contexts/store';
-import { login, logout } from '../../contexts/actionCreators';
+import { login, logout, taketoken } from '../../contexts/actionCreators';
 
 const SignIn = ({ history }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const [loginState, dispatch] = useContext(store);
+  const [storeState, dispatch] = useContext(store);
 
   const signInSuccess = e => {
     e.preventDefault();
     dispatch(login());
-    // advaced :: Login 로컬스토리지에 저장하는 작업
     history.push('/intro');
   };
 
@@ -32,15 +31,19 @@ const SignIn = ({ history }) => {
     if (!email || !password) {
       setErrorMessage('이메일과 비밀번호를 모두 입력하세요');
     } else {
-      await axios.post(
-        `${process.env.REACT_APP_SERVER_HOST}/users/signin`,
-        {
-          email: email,
-          password: password,
-        },
-        { 'Content-Type': 'application/json', withCredentials: true },
-      );
-      await signInSuccess(e);
+      await axios
+        .post(
+          `${process.env.REACT_APP_SERVER_HOST}/users/signin`,
+          {
+            email: email,
+            password: password,
+          },
+          { 'Content-Type': 'application/json', withCredentials: true },
+        )
+        .then(data => {
+          dispatch(taketoken(data.data.accToken));
+          signInSuccess(e);
+        });
     }
   };
 

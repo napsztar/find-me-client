@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import '../../styles/main.scss';
 import Header from '../header/Header';
 import Modal from '../../utils/Modal';
 import axios from 'axios';
 import List from './List';
 import { isEmptyObject } from '../../utils/common';
+import { store } from '../../contexts/store';
 
 const Edit = ({ match }) => {
   const answerId = match.params.answerId;
@@ -12,6 +13,7 @@ const Edit = ({ match }) => {
   const [answer, setAnswer] = useState({});
   const [editAnswer, setEditAnswer] = useState('');
   const [isModalDisplay, setIsModalDisplay] = useState(false);
+  const [storeState, dispatch] = useContext(store);
 
   useEffect(() => {
     (async () => {
@@ -19,7 +21,7 @@ const Edit = ({ match }) => {
       try {
         const response = await axios.post(
           `${process.env.REACT_APP_SERVER_HOST}/answer/read`,
-          { answerId: answerId },
+          { answerId: answerId, accessToken: storeState.accToken },
           { 'Content-Type': 'application/json', withCredentials: true },
         );
         setAnswer(response.data);
@@ -43,7 +45,11 @@ const Edit = ({ match }) => {
         try {
           const response = await axios.post(
             `${process.env.REACT_APP_SERVER_HOST}/answer/edit`,
-            { answerId: answer.answerId, answerContent: editAnswer },
+            {
+              answerId: answer.answerId,
+              answerContent: editAnswer,
+              accessToken: storeState.accToken,
+            },
             { 'Content-Type': 'application/json', withCredentials: true },
           );
           setIsModalDisplay(true);

@@ -6,7 +6,7 @@ import { store } from '../../contexts/store';
 import { login, logout } from '../../contexts/actionCreators';
 
 const MyPage = ({ history }) => {
-  const [loginState, dispatch] = useContext(store);
+  const [storeState, dispatch] = useContext(store);
   const [errorMessage, setErrorMessage] = useState('');
   const [inputs, setInputs] = useState({
     email: '',
@@ -35,7 +35,7 @@ const MyPage = ({ history }) => {
     await axios
       .post(
         `${process.env.REACT_APP_SERVER_HOST}/users/delete`,
-        {},
+        { accessToken: storeState.accToken },
         { 'Content-Type': 'application/json', withCredentials: true },
       )
       .catch(err => console.log('hey why not'));
@@ -49,9 +49,7 @@ const MyPage = ({ history }) => {
       await axios
         .post(
           `${process.env.REACT_APP_SERVER_HOST}/users/update`,
-          {
-            changePassword: changePassword,
-          },
+          { accessToken: storeState.accToken, changePassword: changePassword },
           { 'Content-Type': 'application/json', withCredentials: true },
         )
         .catch(err => console.log(err));

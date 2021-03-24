@@ -3,6 +3,7 @@ import '../../styles/main.scss';
 import QuestionContext from '../../contexts/question';
 import Header from '../header/Header';
 import { equalsDate, isEmptyObject } from '../../utils/common';
+import { store } from '../../contexts/store';
 import axios from 'axios';
 import Modal from '../../utils/Modal';
 
@@ -10,6 +11,7 @@ const Add = ({ history }) => {
   const { state, actions } = useContext(QuestionContext);
   const [answerContent, setAnswerContent] = useState('');
   const [isModalDisplay, setIsModalDisplay] = useState(false);
+  const [storeState, dispatch] = useContext(store);
   const handleModalDisplay = value => {
     setIsModalDisplay(value);
   };
@@ -29,7 +31,11 @@ const Add = ({ history }) => {
         try {
           const response = await axios.post(
             `${process.env.REACT_APP_SERVER_HOST}/answer/add`,
-            { answerId: state.question.answerId, answerContent: answerContent },
+            {
+              answerId: state.question.answerId,
+              answerContent: answerContent,
+              accessToken: storeState.accToken,
+            },
             { 'Content-Type': 'application/json', withCredentials: true },
           );
 
@@ -56,7 +62,7 @@ const Add = ({ history }) => {
         try {
           const response = await axios.post(
             `${process.env.REACT_APP_SERVER_HOST}/intro`,
-            {},
+            { accessToken: storeState.accToken },
             { 'Content-Type': 'application/json', withCredentials: true },
           );
           actions.setQuestion(response.data);

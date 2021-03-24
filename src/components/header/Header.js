@@ -11,8 +11,7 @@ import { login, logout } from '../../contexts/actionCreators';
 
 const Header = ({ history }) => {
   const [isToggleOn, setToggleOn] = useState(false);
-
-  const [loginState, dispatch] = useContext(store);
+  const [storeState, dispatch] = useContext(store);
 
   const signOutComplete = e => {
     e.preventDefault();
@@ -27,7 +26,7 @@ const Header = ({ history }) => {
   const handleSignOut = async e => {
     await axios.post(
       `${process.env.REACT_APP_SERVER_HOST}/users/signout`,
-      {},
+      { accessToken: storeState.accToken },
       {
         'Content-Type': 'application/json',
         withCredentials: true,
