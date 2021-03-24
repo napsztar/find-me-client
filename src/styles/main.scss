@@ -163,16 +163,16 @@ body {
       z-index: -1;
     }
   }
-
+&.intro {
   .title {
     margin: 4.5em 2.5em;
     font-family: 'PT Serif', serif;
-    font-size:  xxx-large;
+    font-size: xxx-large;
   }
 
   .today-question {
-    margin:  4.5em 2.5em;
-    font-size:  x-large;
+    margin: 4.5em 2.5em;
+    font-size: x-large;
   }
 
   .floating-button {
@@ -187,4 +187,5 @@ body {
     box-shadow: 1.5px 1px 2px #999;
     padding-top: 6px;
   }
+}
 }
