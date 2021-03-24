@@ -23,19 +23,19 @@ const Header = ({ signOutComplete }) => {
   };
 
   return (
-    <div className="container">
+    <div className="container signup header">
       <header>
         <span>
           <img src={logo} alt="logo" width="300px" height="95px"></img>
         </span>
-        <div>
-          <div>
+        <div className="nav">
+          <div className="move-intro">
             <Link to="/intro">
-              <BiBookHeart size="30" />
+              <BiBookHeart size="40" color="#FB5B38" />
             </Link>
           </div>
           <div className="toggle" onClick={() => handleToggle()}>
-            <BsFillPersonFill size="30" />
+            <BsFillPersonFill size="40" color="#FB5B38" />
           </div>
           <div style={{ display: isToggleOn ? 'block' : 'none' }}>
             <Link to="/users">마이페이지</Link>

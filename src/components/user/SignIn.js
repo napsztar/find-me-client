@@ -3,7 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import axios from 'axios';
 import logo from '../../image/logo.png';
-import '../../styles/user.scss';
+import '../../styles/main.scss';
 
 const SignIn = ({ isSigned, signInSuccess, socialLoginHandler, history }) => {
   const [email, setEmail] = useState('');
@@ -47,7 +47,7 @@ const SignIn = ({ isSigned, signInSuccess, socialLoginHandler, history }) => {
   };
 
   return (
-    <div className="container">
+    <div className="container signin">
       <div className="logo-container">
         <img src={logo} alt="logo" width="90%" height="230px"></img>
       </div>

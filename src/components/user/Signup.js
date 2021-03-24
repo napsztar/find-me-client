@@ -49,7 +49,7 @@ const SignUp = ({ history, signOutComplete }) => {
   };
 
   return (
-    <div className="container">
+    <div className="container signup">
       <Header signOutComplete={signOutComplete} />
       <div className="userinfo-container">
         <form onSubmit={e => e.preventDefault()}>
@@ -91,7 +91,7 @@ const SignUp = ({ history, signOutComplete }) => {
           </div>
         </form>
       </div>
-      <div className="signup-btn">
+      <div>
         {errorMessage === '' ? null : (
           <div className="error-box">{errorMessage}</div>
         )}
