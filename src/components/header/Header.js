@@ -28,13 +28,13 @@ const Header = ({ signOutComplete }) => {
         <span>
           <img src={logo} alt="logo" width="300px" height="95px"></img>
         </span>
-        <div className="nav">
-          <div className="move-intro">
+        <div>
+          <div>
             <Link to="/intro">
               <BiBookHeart size="40" color="#FB5B38" />
             </Link>
           </div>
-          <div className="toggle" onClick={() => handleToggle()}>
+          <div onClick={() => handleToggle()}>
             <BsFillPersonFill size="40" color="#FB5B38" />
           </div>
           <div style={{ display: isToggleOn ? 'block' : 'none' }}>
