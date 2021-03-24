@@ -21,8 +21,10 @@ const Edit = ({ match, history }) => {
           { answerId: answerId },
           { 'Content-Type': 'application/json', withCredentials: true },
         );
-        setAnswer(response.data);
-        setEditAnswer(answer.answerContent);
+        if (response.data) {
+          setAnswer(response.data);
+          setEditAnswer(response.data.answerContent);
+        }
       } catch (e) {
         console.log(e);
       }
