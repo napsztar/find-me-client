@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import '../../styles/main.scss';
 import Header from '../header/Header';
 import axios from 'axios';
-import List from './List';
 import { isEmptyObject } from '../../utils/common';
 import { OneModal } from '../../utils/Modal';
 
@@ -50,7 +49,11 @@ const Edit = ({ match, history }) => {
             { answerId: answer.answerId, answerContent: editAnswer },
             { 'Content-Type': 'application/json', withCredentials: true },
           );
-          setIsModalDisplay(true);
+          if (
+            response.data.message === 'A answer has been successfully updated'
+          ) {
+            setIsModalDisplay(true);
+          }
         } catch (e) {
           console.log(e);
         }
@@ -61,16 +64,18 @@ const Edit = ({ match, history }) => {
     return null;
   }
   return (
-    <div className="container edit">
+    <div className="container">
       <Header />
-      <div>{answer.questionContent}</div>
-      <textarea
-        value={editAnswer}
-        onChange={e => {
-          setEditAnswer(e.target.value);
-        }}
-      />
-      <button onClick={handleEditAnswer}>수정하기</button>
+      <div className="content edit">
+        <div>{answer.questionContent}</div>
+        <textarea
+          value={editAnswer}
+          onChange={e => {
+            setEditAnswer(e.target.value);
+          }}
+        />
+        <button onClick={handleEditAnswer}>수정하기</button>
+      </div>
       <OneModal
         isModalDisplay={isModalDisplay}
         handleModalDisplay={handleModalDisplay}

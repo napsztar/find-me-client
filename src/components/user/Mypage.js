@@ -66,61 +66,63 @@ const MyPage = ({ handleSignOut, history }) => {
   return (
     <div>
       <div className="container">
-        <form onSubmit={e => e.preventDefault()}>
-          <div className="email-container">
-            <span>Email</span>
-            <input
-              type="email"
-              name="email"
-              value={email}
-              onChange={onChangeInput}
-            ></input>
-          </div>
-          <div className="nickName-container">
-            <span>Nickname</span>
-            <input
-              type="nickName"
-              name="nickName"
-              value={nickName}
-              onChange={onChangeInput}
-            ></input>
-          </div>
-          <div className="password-container">
-            <span>Password</span>
-            <input
-              type="password"
-              name="current-password"
-              value={password}
-              onChange={onChangeInput}
-            ></input>
-          </div>
-          <div className="change-password-container">
-            <span>Change Password</span>
-            <input
-              type="password"
-              name="new-password"
-              value={changePassword}
-              onChange={onChangeInput}
-              placeholder="Enter a password to change"
-            ></input>
-          </div>
-          <div className="btn-container">
-            {errorMessage === '' ? null : (
-              <div className="error-box">{errorMessage}</div>
-            )}
-            <button type="submit" onClick={handleChangePassword}>
-              비밀번호 변경
-            </button>
-            <button
-              type="submit"
-              onClick={() => {
-                setIsWithdrawalModalDisplay(true);
-              }}
-            >
-              회원탈퇴
-            </button>
-          </div>
-        </form>
+        <div className="content">
+          <form onSubmit={e => e.preventDefault()}>
+            <div className="email-container">
+              <span>Email</span>
+              <input
+                type="email"
+                name="email"
+                value={email}
+                onChange={onChangeInput}
+              ></input>
+            </div>
+            <div className="nickName-container">
+              <span>Nickname</span>
+              <input
+                type="nickName"
+                name="nickName"
+                value={nickName}
+                onChange={onChangeInput}
+              ></input>
+            </div>
+            <div className="password-container">
+              <span>Password</span>
+              <input
+                type="password"
+                name="current-password"
+                value={password}
+                onChange={onChangeInput}
+              ></input>
+            </div>
+            <div className="change-password-container">
+              <span>Change Password</span>
+              <input
+                type="password"
+                name="new-password"
+                value={changePassword}
+                onChange={onChangeInput}
+                placeholder="Enter a password to change"
+              ></input>
+            </div>
+            <div className="btn-container">
+              {errorMessage === '' ? null : (
+                <div className="error-box">{errorMessage}</div>
+              )}
+              <button type="submit" onClick={handleChangePassword}>
+                비밀번호 변경
+              </button>
+              <button
+                type="submit"
+                onClick={() => {
+                  setIsWithdrawalModalDisplay(true);
+                }}
+              >
+                회원탈퇴
+              </button>
+            </div>
+          </form>
+        </div>
         <OneModal
           isModalDisplay={isChangePasswordModalDisplay}
           handleModalDisplay={handleChangePasswordModalDisplay}

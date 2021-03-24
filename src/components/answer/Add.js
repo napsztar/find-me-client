@@ -97,12 +97,12 @@ const Add = ({ history }) => {
             등록
           </button>
         </div>
-        <OneModal
-          isModalDisplay={isModalDisplay}
-          handleModalDisplay={handleModalDisplay}
-          message="저장되었습니다."
-        />
       </div>
+      <OneModal
+        isModalDisplay={isModalDisplay}
+        handleModalDisplay={handleModalDisplay}
+        message="저장되었습니다."
+      />
     </div>
   );
 };
