@@ -44,9 +44,9 @@ const List = () => {
     return <div>죄송합니다. 오류가 발생하였습니다.</div>;
   }
   return (
-    <div className="container list">
+    <div className="container">
       <Header />
-      <div className="content">
+      <div className="content list">
         {questions.map(question => (
           <ListItem question={question} key={question.answerId} />
         ))}
