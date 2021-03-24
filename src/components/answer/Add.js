@@ -4,26 +4,20 @@ import QuestionContext from '../../contexts/question';
 import Header from '../header/Header';
 import { equalsDate, isEmptyObject } from '../../utils/common';
 import axios from 'axios';
-import Modal from '../../utils/Modal';
+import { OneModal } from '../../utils/Modal';
 
 const Add = ({ history }) => {
   const { state, actions } = useContext(QuestionContext);
   const [answerContent, setAnswerContent] = useState('');
   const [isModalDisplay, setIsModalDisplay] = useState(false);
-  const handleModalDisplay = value => {
-    setIsModalDisplay(value);
+  const handleModalDisplay = isOk => {
+    setIsModalDisplay(false);
+    if (isOk) {
+      history.push('/answer');
+    }
   };
-
   const handleAddAnswer = () => {
-    if (answerContent === '' || !answerContent) {
-      return (
-        <Modal
-          isModalDisplay={isModalDisplay}
-          handleModalDisplay={handleModalDisplay}
-          message="일기를 작성해주세요."
-        />
-      );
-    } else {
+    if (answerContent !== '' && answerContent) {
       (async () => {
         actions.setLoading(true);
         try {
@@ -34,10 +28,13 @@ const Add = ({ history }) => {
           );
 
           // 로그인이 안 되어 있으면 페이지로 보내기
+          console.log(response.data);
           if (response.data.message) {
             if (response.data.message === 'invalid access token') {
               // history.push('/');
-            } else if (response.data.message === 'Success') {
+            } else if (
+              response.data.message === 'A answer has been successfully added'
+            ) {
               setIsModalDisplay(true);
             }
           }
@@ -88,10 +85,10 @@ const Add = ({ history }) => {
           }}
         />
         <button onClick={handleAddAnswer}>등록</button>
-        <Modal
+        <OneModal
           isModalDisplay={isModalDisplay}
           handleModalDisplay={handleModalDisplay}
-          message="성공적으로 등록되었습니다."
+          message="저장되었습니다."
         />
       </div>
     </div>
