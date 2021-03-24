@@ -23,32 +23,31 @@ const Header = ({ signOutComplete }) => {
   };
 
   return (
-    <div className="container signup header">
-      <header>
-        <span>
-          <img src={logo} alt="logo" width="300px" height="95px"></img>
-        </span>
-        <div>
-          <div>
-            <Link to="/intro">
-              <BiBookHeart size="40" color="#FB5B38" />
-            </Link>
-          </div>
-          <div onClick={() => handleToggle()}>
-            <BsFillPersonFill size="40" color="#FB5B38" />
-          </div>
-          <div style={{ display: isToggleOn ? 'block' : 'none' }}>
-            <Link to="/users">마이페이지</Link>
-          </div>
-          <div
-            style={{ display: isToggleOn ? 'block' : 'none' }}
-            onClick={handleSignOut}
-          >
-            로그아웃
-          </div>
+    <header>
+      <span>
+        <img src={logo} alt="logo" width="300px" height="95px"/>
+      </span>
+      <div>
+        <div style={{ marginRight: 25 }}>
+          <Link to="/intro">
+            <BiBookHeart size="30" />
+          </Link>
+
         </div>
-      </header>
-    </div>
+        <div className="toggle" onClick={() => handleToggle()}>
+          <BsFillPersonFill size="30" />
+        </div>
+        <div style={{ display: isToggleOn ? 'block' : 'none' }}>
+          <Link to="/users">마이페이지</Link>
+        </div>
+        <div
+          style={{ display: isToggleOn ? 'block' : 'none' }}
+          onClick={handleSignOut}
+        >
+          로그아웃
+        </div>
+      </div>
+    </header>
   );
 };
 
