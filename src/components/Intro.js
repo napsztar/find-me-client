@@ -12,7 +12,6 @@ import { store } from '../contexts/store';
 const Intro = () => {
   const { state, actions } = useContext(QuestionContext);
   const [tokenState, dispatch] = useContext(store);
-  console.log('??????', tokenState.accToken);
   useEffect(() => {
     if (
       isEmptyObject(state.question) ||

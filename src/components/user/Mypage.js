@@ -38,7 +38,7 @@ const MyPage = ({ history }) => {
         { accessToken: storeState.accToken },
         { 'Content-Type': 'application/json', withCredentials: true },
       )
-      .catch(err => console.log('hey why not'));
+      .catch(err => console.log(err));
     await signOutSuccess(e);
   };
 
@@ -54,7 +54,6 @@ const MyPage = ({ history }) => {
         )
         .catch(err => console.log(err));
       await signOutSuccess(e);
-      console.log('통신 잘 되었음');
     }
   };
 
