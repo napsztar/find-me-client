@@ -4,6 +4,7 @@ import Header from '../header/Header';
 import axios from 'axios';
 import { isEmptyObject } from '../../utils/common';
 import { OneModal } from '../../utils/Modal';
+import qImg from '../../image/q.png';
 
 const Edit = ({ match, history }) => {
   const answerId = match.params.answerId;
@@ -69,14 +70,21 @@ const Edit = ({ match, history }) => {
     <div className="container">
       <Header />
       <div className="content edit">
-        <div>{answer.questionContent}</div>
+        <div className="edit-question">
+          <img src={qImg} alt="q" width="100px" height="100px" />
+          <span>{answer.questionContent}</span>
+        </div>
         <textarea
           value={editAnswer}
           onChange={e => {
             setEditAnswer(e.target.value);
           }}
         />
-        <button onClick={handleEditAnswer}>수정하기</button>
+        <div>
+          <button className="answer-btn" onClick={handleEditAnswer}>
+            수정
+          </button>
+        </div>
       </div>
       <OneModal
         isModalDisplay={isModalDisplay}
