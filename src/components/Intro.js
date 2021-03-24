@@ -50,7 +50,7 @@ const Intro = () => {
       <div className="title">Today's carrot question</div>
       <div className="today-question">{state.question.questionContent}</div>
       <Link to={'/answer/'}>
-        <img src={introImg} alt="gold" width="250px" height="285px" />
+        <img src={introImg} alt="carrot" width="400px" height="445x" />
       </Link>
       <FloatingButton children={<MdModeEdit size={25} />} to="/answer/add" />
     </div>

@@ -78,7 +78,7 @@ const Add = ({ history }) => {
     return <div>죄송합니다. 오류가 발생하였습니다.</div>;
   }
   return (
-    <div className="add">
+    <div className="container add">
       <div className="content">
         <div className="add-question">{state.question.questionContent}</div>
         <textarea
