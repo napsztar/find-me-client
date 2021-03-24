@@ -27,10 +27,6 @@ const App = ({ history, location }) => {
     history.push('/intro');
   };
 
-  const signOutComplete = e => {
-    e.preventDefault();
-  };
-
   useEffect(() => {
     const authCode = new URLSearchParams(location.search).get('code');
     if (authCode) {
@@ -55,7 +51,7 @@ const App = ({ history, location }) => {
           component={getNeedLogInPage(Intro, loginState.isLoggedIn)}
         />
         <Route exact path="/users/signup">
-          <SignUp signOutComplete={signOutComplete} />
+          <SignUp />
         </Route>
         <Route exact path="/signin" component={SignIn} />
         <Route exact path="/test/modal" component={TestModal} />

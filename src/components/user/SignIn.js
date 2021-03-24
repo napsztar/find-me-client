@@ -16,7 +16,7 @@ const SignIn = ({ history }) => {
   const signInSuccess = e => {
     e.preventDefault();
     dispatch(login());
-    // advaced :: Login여부 로컬스토리지에 저장하는 작업
+    // advaced :: Login 로컬스토리지에 저장하는 작업
     history.push('/intro');
   };
 

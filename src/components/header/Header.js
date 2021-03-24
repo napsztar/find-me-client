@@ -24,17 +24,16 @@ const Header = ({ history }) => {
     setToggleOn(!isToggleOn);
   };
 
-  const handleSignOut = e => {
-    axios
-      .post(
-        `${process.env.REACT_APP_SERVER_HOST}/users/signout`,
-        {},
-        {
-          'Content-Type': 'application/json',
-          withCredentials: true,
-        },
-      )
-      .then(() => signOutComplete(e));
+  const handleSignOut = async e => {
+    await axios.post(
+      `${process.env.REACT_APP_SERVER_HOST}/users/signout`,
+      {},
+      {
+        'Content-Type': 'application/json',
+        withCredentials: true,
+      },
+    );
+    await signOutComplete(e);
   };
 
   return (

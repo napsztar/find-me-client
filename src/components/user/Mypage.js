@@ -17,6 +17,12 @@ const MyPage = ({ history }) => {
 
   const { email, nickName, password, changePassword } = inputs;
 
+  const signOutSuccess = e => {
+    e.preventDefault();
+    dispatch(logout());
+    history.push('/intro');
+  };
+
   const onChangeInput = e => {
     const { value, name } = e.target;
     setInputs({
@@ -25,29 +31,32 @@ const MyPage = ({ history }) => {
     });
   };
 
-  const signOutComplete = e => {
-    console.log(loginState);
-    e.preventDefault();
-    dispatch(logout()); //loginState.isLoggedIn = false
-
-    history.push('/'); // 홈페이지 이동 => false 이므로 다시 sigin 페이지 이동
+  const handleWithdawal = async e => {
+    await axios
+      .post(
+        `${process.env.REACT_APP_SERVER_HOST}/users/delete`,
+        {},
+        { 'Content-Type': 'application/json', withCredentials: true },
+      )
+      .catch(err => console.log('hey why not'));
+    await signOutSuccess(e);
   };
 
-  const handleChangePassword = () => {
+  const handleChangePassword = async e => {
     if (!email || !nickName || !password || !changePassword) {
       setErrorMessage({ errorMessage: '모든 항목은 필수입니다' });
     } else {
-      axios
+      await axios
         .post(
-          `${process.env.REACT_APP_SERVER_HOST}/users/:userid/update`,
+          `${process.env.REACT_APP_SERVER_HOST}/users/update`,
           {
-            email: email,
-            nickname: nickName,
-            password: changePassword,
+            changePassword: changePassword,
           },
           { 'Content-Type': 'application/json', withCredentials: true },
         )
         .catch(err => console.log(err));
+      await signOutSuccess(e);
+      console.log('통신 잘 되었음');
     }
   };
 
@@ -74,19 +83,20 @@ const MyPage = ({ history }) => {
             ></input>
           </div>
           <div className="password-container">
-            <span>Password</span>
+            <div>Password</div>
             <input
               type="password"
-              name="current-password"
+              name="password"
               value={password}
               onChange={onChangeInput}
+              placeholder="Enter your password"
             ></input>
           </div>
           <div className="change-password-container">
-            <span>Change Password</span>
+            <div>Change Password</div>
             <input
               type="password"
-              name="new-password"
+              name="changePassword"
               value={changePassword}
               onChange={onChangeInput}
               placeholder="Enter a password to change"
@@ -99,7 +109,7 @@ const MyPage = ({ history }) => {
             <button type="submit" onClick={handleChangePassword}>
               비밀번호 변경
             </button>
-            <button type="submit" onClick={signOutComplete}>
+            <button type="submit" onClick={handleWithdawal}>
               회원탈퇴
             </button>
           </div>
