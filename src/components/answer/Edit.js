@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import '../../styles/main.scss';
 import Header from '../header/Header';
-import Modal from '../../utils/Modal';
 import axios from 'axios';
 import List from './List';
 import { isEmptyObject } from '../../utils/common';
+import { OneModal } from '../../utils/Modal';
 
-const Edit = ({ match }) => {
+const Edit = ({ match, history }) => {
   const answerId = match.params.answerId;
   const [loading, setLoading] = useState(false);
   const [answer, setAnswer] = useState({});
@@ -34,9 +34,13 @@ const Edit = ({ match }) => {
     return <div>loading...</div>;
   }
 
-  const handleModalDisplay = value => {
-    setIsModalDisplay(value);
+  const handleModalDisplay = isOk => {
+    setIsModalDisplay(false);
+    if (isOk) {
+      history.push('/answer');
+    }
   };
+
   const handleEditAnswer = () => {
     if (editAnswer !== '') {
       (async () => {
@@ -67,10 +71,10 @@ const Edit = ({ match }) => {
         }}
       />
       <button onClick={handleEditAnswer}>수정하기</button>
-      <Modal
+      <OneModal
         isModalDisplay={isModalDisplay}
         handleModalDisplay={handleModalDisplay}
-        message="수정되었습니다"
+        message="수정되었습니다."
       />
     </div>
   );

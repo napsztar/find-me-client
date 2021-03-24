@@ -2,8 +2,9 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import '../../styles/main.scss';
+import { OneModal, TwoModal } from '../../utils/Modal';
 
-const MyPage = ({ handleSignOut }) => {
+const MyPage = ({ handleSignOut, history }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [inputs, setInputs] = useState({
     email: '',
@@ -11,6 +12,25 @@ const MyPage = ({ handleSignOut }) => {
     password: '',
     changePassword: '',
   });
+
+  const [
+    isChangePasswordModalDisplay,
+    setIsChangePasswordModalDisplay,
+  ] = useState(false);
+  const handleChangePasswordModalDisplay = isOk => {
+    setIsChangePasswordModalDisplay(false);
+  };
+
+  const [isWithdrawalModalDisplay, setIsWithdrawalModalDisplay] = useState(
+    false,
+  );
+  const handleIsWithdrawalModalDisplay = isOk => {
+    setIsWithdrawalModalDisplay(false);
+    if (isOk) {
+      handleSignOut();
+      history.push('/');
+    }
+  };
 
   const { email, nickName, password, changePassword } = inputs;
 
@@ -36,6 +56,9 @@ const MyPage = ({ handleSignOut }) => {
           },
           { 'Content-Type': 'application/json', withCredentials: true },
         )
+        .then(res => {
+          setIsChangePasswordModalDisplay(true);
+        })
         .catch(err => console.log(err));
     }
   };
@@ -88,11 +111,26 @@ const MyPage = ({ handleSignOut }) => {
             <button type="submit" onClick={handleChangePassword}>
               비밀번호 변경
             </button>
-            <button type="submit" onClick={handleSignOut}>
+            <button
+              type="submit"
+              onClick={() => {
+                setIsWithdrawalModalDisplay(true);
+              }}
+            >
               회원탈퇴
             </button>
           </div>
         </form>
+        <OneModal
+          isModalDisplay={isChangePasswordModalDisplay}
+          handleModalDisplay={handleChangePasswordModalDisplay}
+          message="비밀번호가 변경되었습니다."
+        />
+        <TwoModal
+          isModalDisplay={isWithdrawalModalDisplay}
+          handleModalDisplay={handleIsWithdrawalModalDisplay}
+          message="정말로 탈퇴하시겠습니까?"
+        />
       </div>
     </div>
   );
