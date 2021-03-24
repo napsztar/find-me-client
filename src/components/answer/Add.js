@@ -5,6 +5,7 @@ import Header from '../header/Header';
 import { equalsDate, isEmptyObject } from '../../utils/common';
 import axios from 'axios';
 import Modal from '../../utils/Modal';
+import qImg from '../../image/q.png';
 
 const Add = ({ history }) => {
   const { state, actions } = useContext(QuestionContext);
@@ -78,16 +79,27 @@ const Add = ({ history }) => {
     return <div>죄송합니다. 오류가 발생하였습니다.</div>;
   }
   return (
-    <div className="container add">
-      <div className="content">
-        <div className="add-question">{state.question.questionContent}</div>
-        <textarea
-          placeholder={'일기를 써주세요'}
-          onChange={e => {
-            setAnswerContent(e.target.value);
-          }}
-        />
-        <button onClick={handleAddAnswer}>등록</button>
+    <div className="container">
+      <Header />
+      <div className="content add">
+        <div className="add-question">
+          <img src={qImg} alt="q" width="100px" height="100px" />
+          <span>{state.question.questionContent}</span>
+        </div>
+        <div>
+          <textarea
+            placeholder={'일기를 써주세요'}
+            rows={10}
+            onChange={e => {
+              setAnswerContent(e.target.value);
+            }}
+          />
+        </div>
+        <div>
+          <button className="answer-btn" onClick={handleAddAnswer}>
+            등록
+          </button>
+        </div>
         <Modal
           isModalDisplay={isModalDisplay}
           handleModalDisplay={handleModalDisplay}

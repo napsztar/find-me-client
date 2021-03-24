@@ -113,27 +113,46 @@ body {
       }
     }
 
-    .add {
+    &.add {
       text-align: center;
 
       .add-question {
-        margin: 2em 4em;
+        font-size: 2.3rem;
+        margin: 23px 4em 2em;
+        font-family: 'Nanum Brush Script', cursive;
       }
 
       textarea {
-        width: 100%;
-        height: 200px;
-        padding: 10px;
-        box-sizing: border-box;
-        border: solid 3px #552a04;
-        border-radius: 5px;
-        font-size: 16px;
-        resize: both;
-        background: bisque;
+        min-width:533px;
+        min-height: 430px;
+      }
+
+      //textarea {
+      //  width: 100%;
+      //  height: 200px;
+      //  padding: 10px;
+      //  box-sizing: border-box;
+      //  border: solid 3px #552a04;
+      //  border-radius: 5px;
+      //  font-size: 16px;
+      //  resize: both;
+      //  background: bisque;
+      //}
+
+      textarea {
+        width: 25em;
+        height: 4em;
+        margin: 1em;
+        font-size: 15px;
+        border: none;
+        text-align: center;
+        box-shadow: 2px 5px 10px -3px #f3d1b7;
       }
     }
+    &.edit{
 
-    // 일단 하나만 쓸 예정이라서 modal로 했음
+    }
+
     .modal {
       display: none;
       position: relative;
@@ -173,23 +192,29 @@ body {
     }
 
     &.intro {
+      text-align: center;
+      .logo-container{
+        margin: 4.5em 4.5em;
+      }
       .title {
-        margin: 4.5em 2.5em;
+        margin: 6.5em 6.5em;
         font-family: 'PT Serif', serif;
-        font-size: xxx-large;
+        font-size: 30px;
+        text-align: center;
       }
 
       .today-question {
         margin: 4.5em 2.5em;
-        font-size: x-large;
+        font-size: 30px;
+        text-align: center;
       }
 
       .floating-button {
         position: fixed;
-        width: 40px;
-        height: 40px;
-        bottom: 40px;
-        margin-left: 310px;
+        width: 50px;
+        height: 50px;
+        bottom: 50px;
+        margin-left: 710px;
         background-color: #dd8f53;
         color: #fff;
         border-radius: 50px;
@@ -435,5 +460,43 @@ body {
         }
       }
     }
+  }
+}
+
+.answer-btn {
+     margin: 2em 3em;
+    background:#FFDEBC;
+    color:black;
+    border:none;
+    position:relative;
+    height:60px;
+    font-size:1.6em;
+    padding:0 2em;
+    cursor:pointer;
+    transition:800ms ease all;
+    outline:none;
+  &:hover{
+    background:#fff;
+    color: #dd8f53;
+  }
+  &:before,&:after{
+    content:'';
+    position:absolute;
+    top:0;
+    right:0;
+    height:2px;
+    width:0;
+    background: #dd8f53;
+    transition:400ms ease all;
+  }
+  &:after{
+    right:inherit;
+    top:inherit;
+    left:0;
+    bottom:0;
+  }
+  &:hover:before,&:hover:after{
+    width:100%;
+    transition:800ms ease all;
   }
 }
