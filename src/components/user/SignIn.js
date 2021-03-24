@@ -1,21 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import axios from 'axios';
 import logo from '../../image/logo.png';
 import '../../styles/main.scss';
+import { store } from '../../contexts/store';
+import { login, logout } from '../../contexts/actionCreators';
 
-
-const SignIn = ({ isSigned, signInSuccess, socialLoginHandler, history }) => {
+const SignIn = ({ history }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [loginState, dispatch] = useContext(store);
 
-  useEffect(() => {
-    if (isSigned) {
-      history.push('/intro');
-    }
-  });
+  const signInSuccess = e => {
+    e.preventDefault();
+    dispatch(login());
+    // advaced :: Login여부 로컬스토리지에 저장하는 작업
+    history.push('/intro');
+  };
 
   const onChangeEmail = e => {
     setEmail(e.target.value);
@@ -25,26 +28,26 @@ const SignIn = ({ isSigned, signInSuccess, socialLoginHandler, history }) => {
     setPassword(e.target.value);
   };
 
-  const handleSignIn = () => {
+  const handleSignIn = async e => {
     if (!email || !password) {
       setErrorMessage('이메일과 비밀번호를 모두 입력하세요');
     } else {
-      axios
-        .post(
-          `${process.env.REACT_APP_SERVER_HOST}/users/signin`,
-          {
-            email: email,
-            password: password,
-          },
-          { 'Content-Type': 'application/json', withCredentials: true },
-        )
-        .then(() => signInSuccess(), history.push('/intro'))
-        .catch(err => {
-          err.response.status === 401
-            ? setErrorMessage('일치하는 정보가 없습니다.')
-            : alert(err);
-        });
+      await axios.post(
+        `${process.env.REACT_APP_SERVER_HOST}/users/signin`,
+        {
+          email: email,
+          password: password,
+        },
+        { 'Content-Type': 'application/json', withCredentials: true },
+      );
+      await signInSuccess(e);
     }
+  };
+
+  const socialLoginHandler = () => {
+    window.location.assign(
+      'https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=101615654292-d5eqm5ke1i58qcqbfg0ktrp7hdbd0mpt.apps.googleusercontent.com&scope=email profile&redirect_uri=http://localhost:3000',
+    );
   };
 
   return (

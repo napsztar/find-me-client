@@ -1,9 +1,12 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
 import '../../styles/main.scss';
+import { store } from '../../contexts/store';
+import { login, logout } from '../../contexts/actionCreators';
 
-const MyPage = ({ handleSignOut }) => {
+const MyPage = ({ history }) => {
+  const [loginState, dispatch] = useContext(store);
   const [errorMessage, setErrorMessage] = useState('');
   const [inputs, setInputs] = useState({
     email: '',
@@ -20,6 +23,14 @@ const MyPage = ({ handleSignOut }) => {
       ...inputs,
       [name]: value,
     });
+  };
+
+  const signOutComplete = e => {
+    console.log(loginState);
+    e.preventDefault();
+    dispatch(logout()); //loginState.isLoggedIn = false
+
+    history.push('/'); // 홈페이지 이동 => false 이므로 다시 sigin 페이지 이동
   };
 
   const handleChangePassword = () => {
@@ -88,7 +99,7 @@ const MyPage = ({ handleSignOut }) => {
             <button type="submit" onClick={handleChangePassword}>
               비밀번호 변경
             </button>
-            <button type="submit" onClick={handleSignOut}>
+            <button type="submit" onClick={signOutComplete}>
               회원탈퇴
             </button>
           </div>
