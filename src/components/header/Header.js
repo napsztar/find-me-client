@@ -32,6 +32,7 @@ const Header = ({ signOutComplete }) => {
           <Link to="/intro">
             <BiBookHeart size="30" />
           </Link>
+
         </div>
         <div className="toggle" onClick={() => handleToggle()}>
           <BsFillPersonFill size="30" />
