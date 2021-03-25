@@ -1,12 +1,17 @@
 import axios from 'axios';
 import React, { useState, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
+import Header from '../header/Header';
 import '../../styles/main.scss';
+
 import { store } from '../../contexts/store';
 import { login, logout } from '../../contexts/actionCreators';
 
 const MyPage = ({ history }) => {
   const [storeState, dispatch] = useContext(store);
+
+import { OneModal, TwoModal } from '../../utils/Modal';
+
   const [errorMessage, setErrorMessage] = useState('');
   const [inputs, setInputs] = useState({
     email: '',
@@ -14,6 +19,25 @@ const MyPage = ({ history }) => {
     password: '',
     changePassword: '',
   });
+
+  const [
+    isChangePasswordModalDisplay,
+    setIsChangePasswordModalDisplay,
+  ] = useState(false);
+  const handleChangePasswordModalDisplay = isOk => {
+    setIsChangePasswordModalDisplay(false);
+  };
+
+  const [isWithdrawalModalDisplay, setIsWithdrawalModalDisplay] = useState(
+    false,
+  );
+  const handleIsWithdrawalModalDisplay = isOk => {
+    setIsWithdrawalModalDisplay(false);
+    if (isOk) {
+      handleSignOut();
+      history.push('/');
+    }
+  };
 
   const { email, nickName, password, changePassword } = inputs;
 
@@ -52,65 +76,88 @@ const MyPage = ({ history }) => {
           { accessToken: storeState.accToken, changePassword: changePassword },
           { 'Content-Type': 'application/json', withCredentials: true },
         )
+        .then(res => {
+          setIsChangePasswordModalDisplay(true);
+        })
         .catch(err => console.log(err));
       await signOutSuccess(e);
     }
   };
-
   return (
     <div>
       <div className="container">
-        <form onSubmit={e => e.preventDefault()}>
-          <div className="email-container">
-            <span>Email</span>
-            <input
-              type="email"
-              name="email"
-              value={email}
-              onChange={onChangeInput}
-            ></input>
-          </div>
-          <div className="nickName-container">
-            <span>Nickname</span>
-            <input
-              type="nickName"
-              name="nickName"
-              value={nickName}
-              onChange={onChangeInput}
-            ></input>
-          </div>
-          <div className="password-container">
-            <div>Password</div>
-            <input
-              type="password"
-              name="password"
-              value={password}
-              onChange={onChangeInput}
-              placeholder="Enter your password"
-            ></input>
-          </div>
-          <div className="change-password-container">
-            <div>Change Password</div>
-            <input
-              type="password"
-              name="changePassword"
-              value={changePassword}
-              onChange={onChangeInput}
-              placeholder="Enter a password to change"
-            ></input>
-          </div>
-          <div className="btn-container">
+        <Header />
+        <div className="content mypage">
+          <form onSubmit={e => e.preventDefault()}>
+            <div className="email-container">
+              <div>Email</div>
+              <input
+                type="email"
+                name="email"
+                value={email}
+                onChange={onChangeInput}
+                placeholder="Enter your email"
+              ></input>
+            </div>
+            <div className="nickname-container">
+              <div>Nickname</div>
+              <input
+                type="nickName"
+                name="nickName"
+                value={nickName}
+                onChange={onChangeInput}
+                placeholder="Enter your nickname"
+              ></input>
+            </div>
+            <div className="password-container">
+              <div>Password</div>
+              <input
+                type="password"
+                name="password"
+                value={password}
+                onChange={onChangeInput}
+                placeholder="Enter your password"
+              ></input>
+            </div>
+            <div className="change-password-container">
+              <div>Change Password</div>
+              <input
+                type="password"
+                name="changePassword"
+                value={changePassword}
+                onChange={onChangeInput}
+                placeholder="Enter a password to change"
+              ></input>
+            </div>
             {errorMessage === '' ? null : (
               <div className="error-box">{errorMessage}</div>
             )}
-            <button type="submit" onClick={handleChangePassword}>
+            <button className="signout-btn" onClick={handleChangePassword}>
               비밀번호 변경
             </button>
-            <button type="submit" onClick={handleWithdawal}>
+
+            <button
+              className="delete-btn"
+              onClick={() => {
+                setIsWithdrawalModalDisplay(true);
+                handleWithdawal();
+              }}
+            >
               회원탈퇴
             </button>
-          </div>
-        </form>
+          </form>
+        </div>
+
+        <OneModal
+          isModalDisplay={isChangePasswordModalDisplay}
+          handleModalDisplay={handleChangePasswordModalDisplay}
+          message="비밀번호가 변경되었습니다."
+        />
+        <TwoModal
+          isModalDisplay={isWithdrawalModalDisplay}
+          handleModalDisplay={handleIsWithdrawalModalDisplay}
+          message="정말로 탈퇴하시겠습니까?"
+        />
       </div>
     </div>
   );

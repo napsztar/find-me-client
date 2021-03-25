@@ -7,20 +7,22 @@ import FloatingButton from '../../utils/FloatingButton';
 import { isEmptyObject } from '../../utils/common';
 import Header from '../header/Header';
 import { store } from '../../contexts/store';
+import ink from '../../image/fepen.png';
+
 
 const ListItem = ({ question }) => {
   return (
     <Link to={`/answer/${question.answerId}`}>
       <div className="item">
-        <div className="thumbnail" />
-        <div className="question">{question.questionContent}</div>
+        <img src={ink} alt="ink" />
+        <span className="question">{question.questionContent}</span>
       </div>
     </Link>
   );
 };
 
 const List = () => {
-  const [questions, setQuestions] = useState({});
+  const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(false);
   const [storeState, dispatch] = useContext(store);
   useEffect(() => {
@@ -33,6 +35,14 @@ const List = () => {
           { 'Content-Type': 'application/json', withCredentials: true },
         );
         setQuestions(response.data);
+        const _questions = response.data;
+        setQuestions(
+          _questions.filter(question => {
+            return (
+              question.answerContent !== null || question.answerContent !== ''
+            );
+          }),
+        );
       } catch (e) {
         console.log(e);
       }
@@ -42,18 +52,17 @@ const List = () => {
   if (loading) {
     return <div>대기 중...</div>;
   }
-  if (isEmptyObject(questions)) {
+  if (questions.length === 0) {
     return <div>죄송합니다. 오류가 발생하였습니다.</div>;
   }
   return (
-    <div className="container list">
+    <div className="container">
       <Header />
-      <div className="content">
+      <div className="content list">
         {questions.map(question => (
           <ListItem question={question} key={question.answerId} />
         ))}
       </div>
-      <FloatingButton children={<MdModeEdit size={25} />} to="/answer/add" />
     </div>
   );
 };

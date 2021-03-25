@@ -4,6 +4,10 @@ import { Link } from 'react-router-dom';
 import Edit from './Edit';
 import { isEmptyObject } from '../../utils/common';
 import { store } from '../../contexts/store';
+import { isEmptyObject, toDateFormat } from '../../utils/common';
+import Header from '../header/Header';
+import qImg from '../../image/q.png';
+
 
 const Read = ({ match, history }) => {
   const { answerId } = match.params;
@@ -33,25 +37,42 @@ const Read = ({ match, history }) => {
   if (isEmptyObject(answer)) {
     return null;
   }
+  console.log(answer.updatedAt);
 
   return (
-    <div>
-      <div>오늘의 질문?{answer.questionContent}</div>
-      <div>오늘의 질문 날짜{answer.questionAt}</div>
-      <div>내가 쓴 답변{answer.answerContent}</div>
-      <div>
-        최근 작성일 : {answer.updatedAt ? answer.updatedAt : answer.createdAt}
+    <div className="container">
+      <Header />
+      <div className="content read">
+        <div className="read-question">
+          <img src={qImg} alt="q" width="100px" height="100px" />
+          <span>{answer.questionContent}</span>
+        </div>
+        <hr />
+        <div className="my-answer">{answer.answerContent}</div>
+
+        <div className="read-data">
+          질문 받은 날짜 : {toDateFormat(answer.questionAt)}
+        </div>
+
+        <div className="update-date">
+          최근 일기 작성 날짜 :{' '}
+          {answer.updatedAt
+            ? toDateFormat(answer.updatedAt)
+            : toDateFormat(answer.createdAt)}
+        </div>
+
+        <button
+          className="answer-btn"
+          onClick={() => {
+            history.push({
+              pathname: `/answer/${answerId}/edit`,
+              state: { answer: answer },
+            });
+          }}
+        >
+          수정하기
+        </button>
       </div>
-      <button
-        onClick={() => {
-          history.push({
-            pathname: `/answer/${answerId}/edit`,
-            state: { answer: answer },
-          });
-        }}
-      >
-        수정
-      </button>
     </div>
   );
 };

@@ -49,53 +49,59 @@ const SignUp = ({ history, signOutComplete }) => {
   };
 
   return (
-    <div className="container signup">
+    <div className="container">
       <Header signOutComplete={signOutComplete} />
-      <div className="userinfo-container">
-        <form onSubmit={e => e.preventDefault()}>
-          <div>
-            <span>Email</span>
-            <input
-              type="email"
-              name="email"
-              value={email}
-              onChange={onChangeInput}
-            ></input>
-          </div>
-          <div>
-            <span>Nickname</span>
-            <input
-              type="nickName"
-              name="nickName"
-              value={nickName}
-              onChange={onChangeInput}
-            ></input>
-          </div>
-          <div>
-            <span>Password</span>
-            <input
-              type="password"
-              name="password"
-              value={password}
-              onChange={onChangeInput}
-            ></input>
-          </div>
-          <div>
-            <span>Check Password</span>
-            <input
-              type="password"
-              name="checkPassword"
-              value={checkPassword}
-              onChange={onChangeInput}
-            ></input>
-          </div>
-        </form>
-      </div>
-      <div>
-        {errorMessage === '' ? null : (
-          <div className="error-box">{errorMessage}</div>
-        )}
-        <button onClick={handleSignUp}>가입하기</button>
+      <div className="content signup">
+        <div className="userinfo-container">
+          <form onSubmit={e => e.preventDefault()}>
+            <div className="email-box">
+              <div>Email</div>
+              <input
+                type="email"
+                name="email"
+                value={email}
+                onChange={onChangeInput}
+                placeholder="Write your Email"
+              ></input>
+            </div>
+            <div className="nickname-box">
+              <div>Nickname</div>
+              <input
+                type="nickName"
+                name="nickName"
+                value={nickName}
+                onChange={onChangeInput}
+                placeholder="Write your Nickname"
+              ></input>
+            </div>
+            <div className="password-box">
+              <div>Password</div>
+              <input
+                type="password"
+                name="password"
+                value={password}
+                onChange={onChangeInput}
+                placeholder="Write your Password"
+              ></input>
+            </div>
+            <div className="check-password-box">
+              <div>Check Password</div>
+              <input
+                type="password"
+                name="checkPassword"
+                value={checkPassword}
+                onChange={onChangeInput}
+                placeholder="Check your Password"
+              ></input>
+            </div>
+          </form>
+        </div>
+        <div>
+          {errorMessage === '' ? null : (
+            <div className="error-box">{errorMessage}</div>
+          )}
+          <button onClick={handleSignUp}>가입하기</button>
+        </div>
       </div>
     </div>
   );

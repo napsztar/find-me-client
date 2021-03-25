@@ -1,13 +1,14 @@
 import React, { useEffect, useState, useContext } from 'react';
 import '../../styles/main.scss';
 import Header from '../header/Header';
-import Modal from '../../utils/Modal';
 import axios from 'axios';
-import List from './List';
 import { isEmptyObject } from '../../utils/common';
 import { store } from '../../contexts/store';
+import { OneModal } from '../../utils/Modal';
+import qImg from '../../image/q.png';
 
-const Edit = ({ match }) => {
+
+const Edit = ({ match, history }) => {
   const answerId = match.params.answerId;
   const [loading, setLoading] = useState(false);
   const [answer, setAnswer] = useState({});
@@ -24,8 +25,10 @@ const Edit = ({ match }) => {
           { answerId: answerId, accessToken: storeState.accToken },
           { 'Content-Type': 'application/json', withCredentials: true },
         );
-        setAnswer(response.data);
-        setEditAnswer(answer.answerContent);
+        if (response.data) {
+          setAnswer(response.data);
+          setEditAnswer(response.data.answerContent);
+        }
       } catch (e) {
         console.log(e);
       }
@@ -36,9 +39,13 @@ const Edit = ({ match }) => {
     return <div>loading...</div>;
   }
 
-  const handleModalDisplay = value => {
-    setIsModalDisplay(value);
+  const handleModalDisplay = isOk => {
+    setIsModalDisplay(false);
+    if (isOk) {
+      history.push('/answer');
+    }
   };
+
   const handleEditAnswer = () => {
     if (editAnswer !== '') {
       (async () => {
@@ -52,7 +59,11 @@ const Edit = ({ match }) => {
             },
             { 'Content-Type': 'application/json', withCredentials: true },
           );
-          setIsModalDisplay(true);
+          if (
+            response.data.message === 'A answer has been successfully updated'
+          ) {
+            setIsModalDisplay(true);
+          }
         } catch (e) {
           console.log(e);
         }
@@ -63,20 +74,29 @@ const Edit = ({ match }) => {
     return null;
   }
   return (
-    <div className="container edit">
+    <div className="container">
       <Header />
-      <div>{answer.questionContent}</div>
-      <textarea
-        value={editAnswer}
-        onChange={e => {
-          setEditAnswer(e.target.value);
-        }}
-      />
-      <button onClick={handleEditAnswer}>수정하기</button>
-      <Modal
+      <div className="content edit">
+        <div className="edit-question">
+          <img src={qImg} alt="q" width="100px" height="100px" />
+          <span>{answer.questionContent}</span>
+        </div>
+        <textarea
+          value={editAnswer}
+          onChange={e => {
+            setEditAnswer(e.target.value);
+          }}
+        />
+        <div>
+          <button className="answer-btn" onClick={handleEditAnswer}>
+            수정
+          </button>
+        </div>
+      </div>
+      <OneModal
         isModalDisplay={isModalDisplay}
         handleModalDisplay={handleModalDisplay}
-        message="수정되었습니다"
+        message="수정되었습니다."
       />
     </div>
   );

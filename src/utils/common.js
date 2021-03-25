@@ -5,6 +5,7 @@ const equalsDate = (dateA, dateB = new Date()) =>
   dateA.toLocaleString() === dateB.toLocaleString();
 const isEmptyObject = obj => Object.keys(obj).length === 0;
 
+
 const getNeedLogInPage = (component, isLoggedIn) => {
   // advanced :: isloggedin 의 t/f 여부를 webLocalStorage 를 보고 판단
   if (isLoggedIn === true) {
@@ -14,4 +15,7 @@ const getNeedLogInPage = (component, isLoggedIn) => {
   }
 };
 
-export { equalsDate, isEmptyObject, getNeedLogInPage };
+const toDateFormat = dateString => dateString.split('T')[0];
+
+export { equalsDate, isEmptyObject, toDateFormat,getNeedLogInPage };
+
