@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
-import Header from '../header/Header';
+import Header from '../../components/Header/Header';
 import '../../styles/main.scss';
+import requests from '../../utils/requests';
 
 const SignUp = ({ history, signOutComplete }) => {
   const [errorMessage, setErrorMessage] = useState('');
@@ -31,7 +32,7 @@ const SignUp = ({ history, signOutComplete }) => {
     } else {
       axios
         .post(
-          `${process.env.REACT_APP_SERVER_HOST}/users/signup`,
+          requests.SIGN_UP_PATH,
           {
             email: email,
             nickname: nickName,

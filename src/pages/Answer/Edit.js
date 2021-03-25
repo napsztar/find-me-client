@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useContext } from 'react';
 import '../../styles/main.scss';
-import Header from '../header/Header';
+import Header from '../../components/Header/Header';
 import axios from 'axios';
 import { isEmptyObject } from '../../utils/common';
 import { store } from '../../contexts/store';
-import { OneModal } from '../../utils/Modal';
+import { OneModal } from '../../components/Modal/Modal';
 import qImg from '../../image/q.png';
-
+import requests from '../../utils/requests';
 
 const Edit = ({ match, history }) => {
   const answerId = match.params.answerId;
@@ -14,14 +14,14 @@ const Edit = ({ match, history }) => {
   const [answer, setAnswer] = useState({});
   const [editAnswer, setEditAnswer] = useState('');
   const [isModalDisplay, setIsModalDisplay] = useState(false);
-  const [storeState, dispatch] = useContext(store);
+  const [storeState] = useContext(store);
 
   useEffect(() => {
     (async () => {
       setLoading(true);
       try {
         const response = await axios.post(
-          `${process.env.REACT_APP_SERVER_HOST}/answer/read`,
+          requests.READ_ANSWER_PATH,
           { answerId: answerId, accessToken: storeState.accToken },
           { 'Content-Type': 'application/json', withCredentials: true },
         );
@@ -33,7 +33,7 @@ const Edit = ({ match, history }) => {
         console.log(e);
       }
       setLoading(false);
-    })();
+    })(); // eslint-disable-next-line
   }, []);
   if (loading) {
     return <div>loading...</div>;
@@ -51,7 +51,7 @@ const Edit = ({ match, history }) => {
       (async () => {
         try {
           const response = await axios.post(
-            `${process.env.REACT_APP_SERVER_HOST}/answer/edit`,
+            requests.EDIT_ANSWER_PATH,
             {
               answerId: answer.answerId,
               answerContent: editAnswer,

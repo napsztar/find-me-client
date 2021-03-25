@@ -5,9 +5,9 @@ import { BsFillPersonFill } from 'react-icons/bs';
 import axios from 'axios';
 import logo from '../../image/logo.png';
 import '../../styles/main.scss';
-
+import requests from '../../utils/requests';
 import { store } from '../../contexts/store';
-import { login, logout } from '../../contexts/actionCreators';
+import { logout } from '../../contexts/actionCreators';
 
 const Header = ({ history }) => {
   const [isToggleOn, setToggleOn] = useState(false);
@@ -25,7 +25,7 @@ const Header = ({ history }) => {
 
   const handleSignOut = async e => {
     await axios.post(
-      `${process.env.REACT_APP_SERVER_HOST}/users/signout`,
+      requests.SIGN_OUT_PATH,
       { accessToken: storeState.accToken },
       {
         'Content-Type': 'application/json',
