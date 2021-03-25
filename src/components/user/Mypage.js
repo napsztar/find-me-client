@@ -3,15 +3,12 @@ import React, { useState, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
 import Header from '../header/Header';
 import '../../styles/main.scss';
-
+import { OneModal, TwoModal } from '../../utils/Modal';
 import { store } from '../../contexts/store';
 import { login, logout } from '../../contexts/actionCreators';
 
 const MyPage = ({ history }) => {
   const [storeState, dispatch] = useContext(store);
-
-import { OneModal, TwoModal } from '../../utils/Modal';
-
   const [errorMessage, setErrorMessage] = useState('');
   const [inputs, setInputs] = useState({
     email: '',
@@ -34,7 +31,7 @@ import { OneModal, TwoModal } from '../../utils/Modal';
   const handleIsWithdrawalModalDisplay = isOk => {
     setIsWithdrawalModalDisplay(false);
     if (isOk) {
-      handleSignOut();
+      handleWithdawal();
       history.push('/');
     }
   };

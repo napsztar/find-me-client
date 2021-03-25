@@ -1,13 +1,9 @@
 import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-import Edit from './Edit';
-import { isEmptyObject } from '../../utils/common';
 import { store } from '../../contexts/store';
 import { isEmptyObject, toDateFormat } from '../../utils/common';
 import Header from '../header/Header';
 import qImg from '../../image/q.png';
-
 
 const Read = ({ match, history }) => {
   const { answerId } = match.params;
@@ -37,7 +33,6 @@ const Read = ({ match, history }) => {
   if (isEmptyObject(answer)) {
     return null;
   }
-  console.log(answer.updatedAt);
 
   return (
     <div className="container">
