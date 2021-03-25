@@ -1,19 +1,20 @@
 import React, { useContext, useEffect, useState } from 'react';
 import '../../styles/main.scss';
 import QuestionContext from '../../contexts/question';
-import Header from '../header/Header';
-import { equalsDate, isEmptyObject } from '../../utils/common';
+import Header from '../../components/Header/Header';
+import { isEmptyObject } from '../../utils/common';
 import { store } from '../../contexts/store';
 import axios from 'axios';
-import { OneModal } from '../../utils/Modal';
+import { OneModal } from '../../components/Modal/Modal';
 import qImg from '../../image/q.png';
+import requests from '../../utils/requests';
 
 const Add = ({ history }) => {
   const { state, actions } = useContext(QuestionContext);
   const [answerContent, setAnswerContent] = useState('');
   const [isModalDisplay, setIsModalDisplay] = useState(false);
 
-  const [storeState, dispatch] = useContext(store);
+  const [storeState] = useContext(store);
 
   const handleModalDisplay = isOk => {
     setIsModalDisplay(false);
@@ -27,7 +28,7 @@ const Add = ({ history }) => {
         actions.setLoading(true);
         try {
           const response = await axios.post(
-            `${process.env.REACT_APP_SERVER_HOST}/answer/add`,
+            requests.ADD_ANSWER_PATH,
             {
               answerId: state.question.answerId,
               answerContent: answerContent,
@@ -52,14 +53,13 @@ const Add = ({ history }) => {
       })();
     }
   };
-
   useEffect(() => {
     if (isEmptyObject(state.question)) {
       (async () => {
         actions.setLoading(true);
         try {
           const response = await axios.post(
-            `${process.env.REACT_APP_SERVER_HOST}/intro`,
+            requests.GET_QUESTION_PATH,
             { accessToken: storeState.accToken },
             { 'Content-Type': 'application/json', withCredentials: true },
           );

@@ -1,19 +1,17 @@
 import { Switch, Route, withRouter } from 'react-router-dom';
-import { useState, useEffect, useContext } from 'react';
+import { useEffect, useContext } from 'react';
 
-import Add from './components/answer/Add';
-import Edit from './components/answer/Edit';
-import List from './components/answer/List';
-import Read from './components/answer/Read';
+import Add from './pages/Answer/Add';
+import Edit from './pages/Answer/Edit';
+import List from './pages/Answer/List';
+import Read from './pages/Answer/Read';
 
-import SignIn from './components/user/SignIn';
-import SignUp from './components/user/Signup';
-import MyPage from './components/user/Mypage';
-import TestModal from './components/test/TestModal';
-import Intro from './components/Intro';
+import SignIn from './pages/User/SignIn';
+import SignUp from './pages/User/Signup';
+import MyPage from './pages/User/Mypage';
+import Intro from './pages/Intro';
 import axios from 'axios';
 
-import { QuestionProvider } from './contexts/question';
 import { store } from './contexts/store';
 import { login } from './contexts/actionCreators';
 import { getNeedLogInPage } from './utils/common';
@@ -39,7 +37,7 @@ const App = ({ history, location }) => {
           { 'Content-Type': 'application/json', withCredentials: true },
         )
         .then(() => signInSuccess());
-    }
+    } // eslint-disable-next-line
   }, []);
 
   return (
@@ -54,7 +52,6 @@ const App = ({ history, location }) => {
           <SignUp />
         </Route>
         <Route exact path="/signin" component={SignIn} />
-        <Route exact path="/test/modal" component={TestModal} />
 
         <Route
           exact

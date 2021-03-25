@@ -2,20 +2,21 @@ import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { store } from '../../contexts/store';
 import { isEmptyObject, toDateFormat } from '../../utils/common';
-import Header from '../header/Header';
+import Header from '../../components/Header/Header';
 import qImg from '../../image/q.png';
+import requests from '../../utils/requests';
 
 const Read = ({ match, history }) => {
   const { answerId } = match.params;
   const [loading, setLoading] = useState(false);
   const [answer, setAnswer] = useState({});
-  const [storeState, dispatch] = useContext(store);
+  const [storeState] = useContext(store);
   useEffect(() => {
     (async () => {
       setLoading(true);
       try {
         const response = await axios.post(
-          `${process.env.REACT_APP_SERVER_HOST}/answer/read`,
+          requests.READ_ANSWER_PATH,
           { answerId: answerId, accessToken: storeState.accToken },
           { 'Content-Type': 'application/json', withCredentials: true },
         );
@@ -24,7 +25,7 @@ const Read = ({ match, history }) => {
         console.log(e);
       }
       setLoading(false);
-    })();
+    })(); // eslint-disable-next-line
   }, []);
   if (loading) {
     return <div>loading...</div>;

@@ -1,11 +1,12 @@
 import axios from 'axios';
 import React, { useState, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
-import Header from '../header/Header';
+import Header from '../../components/Header/Header';
 import '../../styles/main.scss';
-import { OneModal, TwoModal } from '../../utils/Modal';
+import { OneModal, TwoModal } from '../../components/Modal/Modal';
 import { store } from '../../contexts/store';
-import { login, logout } from '../../contexts/actionCreators';
+import { logout } from '../../contexts/actionCreators';
+import requests from '../../utils/requests';
 
 const MyPage = ({ history }) => {
   const [storeState, dispatch] = useContext(store);
@@ -21,13 +22,13 @@ const MyPage = ({ history }) => {
     isChangePasswordModalDisplay,
     setIsChangePasswordModalDisplay,
   ] = useState(false);
+
   const handleChangePasswordModalDisplay = isOk => {
     setIsChangePasswordModalDisplay(false);
     if (isOk) {
-      signOutSuccess();
+      handleChangePassword();
     }
   };
-
   const [isWithdrawalModalDisplay, setIsWithdrawalModalDisplay] = useState(
     false,
   );
@@ -38,14 +39,12 @@ const MyPage = ({ history }) => {
       history.push('/');
     }
   };
-
   const { email, nickName, password, changePassword } = inputs;
 
   const signOutSuccess = e => {
     dispatch(logout());
     history.push('/intro');
   };
-
   const onChangeInput = e => {
     const { value, name } = e.target;
     setInputs({
@@ -53,25 +52,23 @@ const MyPage = ({ history }) => {
       [name]: value,
     });
   };
-
   const handleWithdawal = async e => {
     await axios
       .post(
-        `${process.env.REACT_APP_SERVER_HOST}/users/delete`,
+        requests.DELETE_USER_PATH,
         { accessToken: storeState.accToken },
         { 'Content-Type': 'application/json', withCredentials: true },
       )
       .catch(err => console.log(err));
     await signOutSuccess(e);
   };
-
   const handleChangePassword = async e => {
     if (!email || !nickName || !password || !changePassword) {
       setErrorMessage({ errorMessage: '모든 항목은 필수입니다' });
     } else {
       await axios
         .post(
-          `${process.env.REACT_APP_SERVER_HOST}/users/update`,
+          requests.UPDATE_PASSWORD_PATH,
           { accessToken: storeState.accToken, changePassword: changePassword },
           { 'Content-Type': 'application/json', withCredentials: true },
         )
@@ -136,7 +133,6 @@ const MyPage = ({ history }) => {
             >
               비밀번호 변경
             </button>
-
             <button
               className="delete-btn"
               onClick={() => {
@@ -147,7 +143,6 @@ const MyPage = ({ history }) => {
             </button>
           </form>
         </div>
-
         <OneModal
           isModalDisplay={isChangePasswordModalDisplay}
           handleModalDisplay={handleChangePasswordModalDisplay}
@@ -162,5 +157,4 @@ const MyPage = ({ history }) => {
     </div>
   );
 };
-
 export default withRouter(MyPage);

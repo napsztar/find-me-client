@@ -1,16 +1,17 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import axios from 'axios';
 import logo from '../../image/logo.png';
 import '../../styles/main.scss';
 import { store } from '../../contexts/store';
-import { login, logout, taketoken } from '../../contexts/actionCreators';
-
+import { login, taketoken } from '../../contexts/actionCreators';
+import requests from '../../utils/requests';
 const SignIn = ({ history }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  // eslint-disable-next-line
   const [storeState, dispatch] = useContext(store);
 
   const signInSuccess = e => {
@@ -31,9 +32,10 @@ const SignIn = ({ history }) => {
     if (!email || !password) {
       setErrorMessage('이메일과 비밀번호를 모두 입력하세요');
     } else {
+      console.log(requests.SIGN_IN_PATH);
       await axios
         .post(
-          `${process.env.REACT_APP_SERVER_HOST}/users/signin`,
+          requests.SIGN_IN_PATH,
           {
             email: email,
             password: password,
