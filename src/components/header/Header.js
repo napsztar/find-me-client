@@ -25,24 +25,24 @@ const Header = ({ signOutComplete }) => {
   return (
     <header>
       <span>
-        <img src={logo} alt="logo" width="300px" height="95px"/>
+        <img src={logo} alt="logo" width="300px" height="95px" />
       </span>
       <div>
         <div style={{ marginRight: 25 }}>
           <Link to="/intro">
-            <BiBookHeart size="30" />
+            <BiBookHeart size="30" color="#B6867A" />
           </Link>
-
         </div>
         <div className="toggle" onClick={() => handleToggle()}>
-          <BsFillPersonFill size="30" />
+          <BsFillPersonFill size="30" color="#B6867A" />
         </div>
         <div style={{ display: isToggleOn ? 'block' : 'none' }}>
-          <Link to="/users">마이페이지</Link>
+          <Link to="/users">마이 페이지</Link>
         </div>
         <div
           style={{ display: isToggleOn ? 'block' : 'none' }}
           onClick={handleSignOut}
+          className="signout-btn"
         >
           로그아웃
         </div>

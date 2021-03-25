@@ -2,12 +2,10 @@
 
 * {
   box-sizing: border-box;
-
   &::before,
   &::after {
     box-sizing: border-box;
   }
-
   padding: 0;
   margin: 0;
 }
@@ -36,8 +34,6 @@ body {
 
   header {
     display: flex;
-    justify-content: space-between;
-    flex: 1 0 auto;
     flex-direction: row;
     flex-wrap: nowrap;
     text-align: center;
@@ -48,7 +44,7 @@ body {
       display: flex;
       flex: 2 2 auto;
       flex-wrap: nowrap;
-      margin: 1em 10em 1em 20em;
+      margin: 2em 10em 0.5em 15em;
     }
 
     div {
@@ -60,8 +56,14 @@ body {
     }
 
     :link {
-      display: flex;
       text-decoration: none;
+      margin-left: 1em;
+    }
+    :visited {
+      color: #df8f54;
+    }
+    .signout-btn {
+      color: #df8f54;
     }
   }
 
@@ -145,74 +147,41 @@ body {
     }
   }
 
-
   .content {
     &.list {
       padding-bottom: 40px;
 
       .item {
         font-family: 'Nanum Brush Script', cursive;
-        font-size: 2.5rem;
-        color: black;
-        width: 595px;
-        height: 400px;
-        border-radius: 25px;
-        border: 1px solid rgb(0, 0, 0);
+        font-size: 40px;
+        color: #492f14;
+        width: 16em;
+        height: 3em;
+        border: 1px solid #a58a6e;
         position: relative;
         box-shadow: 2px 2px 10px;
-        transition: all 0.5s;
-        transition-delay: 0.4s;
-        margin: 30px auto auto;
+        font-weight: 50;
+        margin: 1.5em;
       }
 
       .item:hover {
-        width: 680px;
-        height: 450px;
-
         .question {
-          width: 102%;
-          height: 33%;
-          padding: 18px;
-          position: absolute;
-          z-index: 2;
+          color: #e3c381;
         }
       }
 
-      .thumbnail {
-        width: 100%;
-        height: 69%;
-        border-top-left-radius: 25px;
-        border-top-right-radius: 25px;
-        background-image: url('../image/answer-list-thumbnail.png');
-        background-size: cover;
+      :link {
+        text-decoration: none;
       }
 
-      .question {
-        width: 100%;
-        height: 31%;
-        padding: 18px;
-        position: absolute;
-        z-index: 2;
-      }
-    }
-
-    .add {
-      text-align: center;
-
-      .add-question {
-        margin: 2em 4em;
-      }
-
-      textarea {
-        width: 100%;
-        height: 200px;
-        padding: 10px;
-        box-sizing: border-box;
-        border: solid 3px #552a04;
-        border-radius: 5px;
-        font-size: 16px;
-        resize: both;
-        background: bisque;
+      img {
+        width: 2em;
+        height: 1.9em;
+        margin-left: 0.5em;
+        margin-top: 0.4em;
+        -webkit-filter: opacity(0.5) drop-shadow(0 0 0 brown);
+        filter: opacity(0.5) drop-shadow(0 0 0 brown);
+        //color: #a58a6e;
       }
     }
 
@@ -242,7 +211,6 @@ body {
         padding-top: 6px;
       }
     }
-
     //signin page
     &.signin {
       img {
@@ -255,6 +223,7 @@ body {
       form {
         display: flex;
         flex-direction: column;
+        align-items: center;
         flex: 1 1 auto;
         margin-top: 2em;
         margin-bottom: -3em;
@@ -280,7 +249,6 @@ body {
           font-style: italic;
           font-size: 16px;
         }
-
         input:focus {
           outline: 2px solid #ffddbc;
         }
@@ -330,16 +298,19 @@ body {
 
       hr {
         border: none;
-        border-top: 1px solid #ffcccc;
+        border-top: 3px solid #ffcccc;
         background-color: #ffffff00;
         height: 0.5px;
-        width: 70%;
-        margin-bottom: 3em;
+        width: 80%;
+        margin-top: 5em;
+        margin-left: 4em;
+        margin-bottom: 2em;
       }
 
       .social-container {
         display: flex;
         flex: 1 1 auto;
+        align-items: center;
         flex-direction: column;
 
         .social-signin {
@@ -354,19 +325,17 @@ body {
             text-align: center;
           }
         }
-
         .signup-info-container:focus {
           outline: 0;
         }
-
-        .signup-info-container {
-          border: none;
-          font-size: 15px;
-          width: 25.8em;
-          height: 4em;
-          border: solid 3px;
-          cursor: text;
-          background-color: #ffffff00;
+      }
+      .signup-info-container {
+        border: none;
+        font-size: 15px;
+        width: 25.8em;
+        height: 4em;
+        cursor: text;
+        background-color: #ffffff00;
 
           .social-signin:focus {
             outline: 0;
@@ -383,37 +352,25 @@ body {
             animation: blink 1.5s ease-in-out infinite alternate;
           }
 
-          @keyframes blink {
-            0% {
-              opacity: 0;
-            }
-            100% {
-              opacity: 1;
-            }
+        @keyframes blink {
+          0% {
+            opacity: 0;
+          }
+          100% {
+            opacity: 1;
           }
         }
       }
     }
 
-    //signup & header
+    //signup
     &.signup {
-      img {
-        margin-top: 10em;
-        margin-left: 18em;
-      }
-
       .userinfo-container {
         display: flex;
         flex: 3 3 0;
 
         form {
           flex-direction: column;
-
-          .error-box {
-            text-align: center;
-            margin-top: 1em;
-            font-style: italic;
-          }
 
           input {
             width: 25em;
@@ -434,31 +391,89 @@ body {
           input:focus {
             outline: 2px solid #ffddbc;
           }
-        }
 
-        button {
-          color: hsl(222, 25%, 14%);
-          transition: color 0.25s ease-in-out, transform 0.25s ease-in-out;
-          border: none;
-          background-color: #ffddbc;
-          box-shadow: 2px 5px 10px -3px #f3c0b748;
-          text-align: center;
-          font-size: 15px;
-          width: 25em;
-          height: 4em;
-          margin: 3em 1em;
+          .email-box {
+            margin-top: 3.8em;
+            margin-left: 1em;
+
+            div {
+              font-size: 25px;
+              font-weight: 600;
+              text-align: left;
+              margin-left: 0.8em;
+              color: #655341b0;
+            }
+          }
+
+          .nickname-box {
+            margin-top: 2em;
+            margin-left: 1em;
+
+            div {
+              font-size: 25px;
+              font-weight: 600;
+              text-align: left;
+              margin-left: 0.8em;
+              color: #655341b0;
+            }
+          }
+
+          .password-box {
+            margin-top: 2em;
+            margin-left: 1em;
+
+            div {
+              font-size: 25px;
+              font-weight: 600;
+              text-align: left;
+              margin-left: 0.8em;
+              color: #655341b0;
+            }
+          }
+          .check-password-box {
+            margin-top: 2em;
+            margin-left: 1em;
+
+            div {
+              font-size: 25px;
+              font-weight: 600;
+              text-align: left;
+              margin-left: 0.8em;
+              color: #655341b0;
+            }
+          }
         }
+      }
+
+      .error-box {
+        text-align: center;
+        margin-top: 1em;
+        font-size: 18px;
+        font-style: italic;
+      }
+
+      button {
+        color: black;
+        border: none;
+        background-color: #ffddbc;
+        box-shadow: 2px 5px 10px -3px #f3c0b748;
+        text-align: center;
+        font-size: 15px;
+        width: 25em;
+        height: 4em;
+        margin: 4em 1em 1em 2em;
+      }
 
         button:focus {
           outline: 0;
         }
 
         button:hover {
-          animation: swing-button 1s ease;
+          animation: swingHorizontal 1s ease;
           animation-iteration-count: 1;
         }
 
-        @keyframes swing-button {
+        @keyframes swingHorizontal {
           15% {
             transform: translateX(5px);
           }
@@ -477,6 +492,116 @@ body {
           100% {
             transform: translateX(0);
           }
+        }
+      }
+    }
+
+    &.mypage {
+      form {
+        flex-direction: column;
+        input {
+          width: 25em;
+          height: 4em;
+          margin: 1em;
+          font-size: 15px;
+          border: none;
+          text-align: center;
+          box-shadow: 2px 5px 10px -3px #f3d1b7;
+        }
+
+        input::placeholder {
+          color: #b1a394;
+          font-style: italic;
+          font-size: 16px;
+        }
+
+        input:focus {
+          outline: 2px solid #ffddbc;
+        }
+
+        .email-container {
+          margin-top: 3.8em;
+          margin-left: 1em;
+
+          div {
+            font-size: 25px;
+            font-weight: 600;
+            text-align: left;
+            margin-left: 0.8em;
+            color: #655341b0;
+          }
+        }
+
+        .nickname-container {
+          margin-top: 3em;
+          margin-left: 1em;
+
+          div {
+            font-size: 25px;
+            font-weight: 600;
+            text-align: left;
+            margin-left: 0.8em;
+            color: #655341b0;
+          }
+        }
+
+        .password-container {
+          margin-top: 3em;
+          margin-left: 1em;
+
+          div {
+            font-size: 25px;
+            font-weight: 600;
+            text-align: left;
+            margin-left: 0.8em;
+            color: #655341b0;
+          }
+        }
+        .change-password-container {
+          margin-top: 3em;
+          margin-left: 1em;
+
+          div {
+            font-size: 25px;
+            font-weight: 600;
+            text-align: left;
+            margin-left: 0.8em;
+            color: #655341b0;
+          }
+        }
+        .error-box {
+          text-align: center;
+          margin-top: 1em;
+          font-size: 18px;
+          font-style: italic;
+        }
+
+        button {
+          color: hsl(0, 30%, 24%);
+          border: none;
+          background-color: hsla(0, 0%, 100%, 0);
+          transition: transform 0.2s ease, color 0.2s ease;
+          text-align: center;
+          font-size: 18px;
+          width: 6em;
+          height: 4em;
+        }
+        .signout-btn {
+          margin-top: 2em;
+          margin-left: 10em;
+        }
+        .delete-btn {
+          margin-top: 2em;
+          margin-left: 1.5em;
+        }
+
+        button:focus {
+          outline: 0;
+        }
+
+        button:hover {
+          transform: translateX(4px);
+          color: rgba(252, 177, 177, 0.959);
         }
       }
     }
