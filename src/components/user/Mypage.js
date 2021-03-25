@@ -23,6 +23,9 @@ const MyPage = ({ history }) => {
   ] = useState(false);
   const handleChangePasswordModalDisplay = isOk => {
     setIsChangePasswordModalDisplay(false);
+    if (isOk) {
+      signOutSuccess();
+    }
   };
 
   const [isWithdrawalModalDisplay, setIsWithdrawalModalDisplay] = useState(
@@ -39,7 +42,6 @@ const MyPage = ({ history }) => {
   const { email, nickName, password, changePassword } = inputs;
 
   const signOutSuccess = e => {
-    e.preventDefault();
     dispatch(logout());
     history.push('/intro');
   };
@@ -73,9 +75,6 @@ const MyPage = ({ history }) => {
           { accessToken: storeState.accToken, changePassword: changePassword },
           { 'Content-Type': 'application/json', withCredentials: true },
         )
-        .then(res => {
-          setIsChangePasswordModalDisplay(true);
-        })
         .catch(err => console.log(err));
       await signOutSuccess(e);
     }
@@ -129,7 +128,12 @@ const MyPage = ({ history }) => {
             {errorMessage === '' ? null : (
               <div className="error-box">{errorMessage}</div>
             )}
-            <button className="signout-btn" onClick={handleChangePassword}>
+            <button
+              className="signout-btn"
+              onClick={() => {
+                setIsChangePasswordModalDisplay(true);
+              }}
+            >
               비밀번호 변경
             </button>
 
@@ -137,7 +141,6 @@ const MyPage = ({ history }) => {
               className="delete-btn"
               onClick={() => {
                 setIsWithdrawalModalDisplay(true);
-                handleWithdawal();
               }}
             >
               회원탈퇴
