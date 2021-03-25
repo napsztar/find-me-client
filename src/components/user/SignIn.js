@@ -45,7 +45,6 @@ const SignIn = ({ history }) => {
           signInSuccess(e);
         })
         .catch(err => {
-          //console.log(err.response.status);
           err.response.status === 401
             ? setErrorMessage('비밀번호가 일치하지 않습니다.')
             : alert(err);
