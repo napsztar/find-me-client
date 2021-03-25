@@ -118,6 +118,7 @@ const MyPage = ({ handleSignOut, history }) => {
               비밀번호 변경
             </button>
             <button className="delete-btn" onClick={handleSignOut}>
+
             수정  </button>
             <button
               className="delete-btn"
@@ -125,10 +126,12 @@ const MyPage = ({ handleSignOut, history }) => {
                 setIsWithdrawalModalDisplay(true);
               }}
             >
+
               회원탈퇴
             </button>
           </form>
         </div>
+
         <OneModal
           isModalDisplay={isChangePasswordModalDisplay}
           handleModalDisplay={handleChangePasswordModalDisplay}
@@ -139,6 +142,7 @@ const MyPage = ({ handleSignOut, history }) => {
           handleModalDisplay={handleIsWithdrawalModalDisplay}
           message="정말로 탈퇴하시겠습니까?"
         />
+
       </div>
     </div>
   );
