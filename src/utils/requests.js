@@ -3,7 +3,7 @@ const HostDictionaryByEnv = {
   production: 'https://todaycarrot-findme.ga',
 };
 
-export const HOST = HostDictionaryByEnv[process.env.NODE_ENV] || 'development';
+export const HOST = HostDictionaryByEnv[process.env.NODE_ENV] || 'production';
 
 export const SIGN_IN_PATH = HOST + '/users/signin';
 

@@ -49,7 +49,7 @@ const List = () => {
   if (loading) {
     return <div>대기 중...</div>;
   }
-  if (questions.length === 0) {
+  if (!questions.data) {
     return <div>죄송합니다. 오류가 발생하였습니다.</div>;
   }
   return (

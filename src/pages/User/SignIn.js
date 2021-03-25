@@ -90,7 +90,7 @@ const SignIn = ({ history }) => {
               <div className="error-box">{errorMessage}</div>
             )}
             <button type="submit" onClick={handleSignIn}>
-              로그인
+              로그인 {console.log(process.env.NODE_ENV)}
             </button>
           </div>
         </form>
