@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import '../../styles/main.scss';
 import QuestionContext from '../../contexts/question';
 import Header from '../../components/Header/Header';
@@ -53,7 +53,25 @@ const Add = ({ history }) => {
       })();
     }
   };
-
+  useEffect(() => {
+    if (isEmptyObject(state.question)) {
+      (async () => {
+        actions.setLoading(true);
+        try {
+          const response = await axios.post(
+            requests.GET_QUESTION_PATH,
+            { accessToken: storeState.accToken },
+            { 'Content-Type': 'application/json', withCredentials: true },
+          );
+          actions.setQuestion(response.data);
+        } catch (e) {}
+        actions.setLoading(false);
+      })();
+    }
+    return () => {
+      actions.setLoading(false);
+    };
+  }, []);
   if (state.loading) {
     return <div>loading...</div>;
   }

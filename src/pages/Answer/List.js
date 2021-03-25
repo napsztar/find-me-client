@@ -31,15 +31,18 @@ const List = () => {
           { accessToken: storeState.accToken },
           { 'Content-Type': 'application/json', withCredentials: true },
         );
-        setQuestions(response.data);
-        const _questions = response.data;
-        setQuestions(
-          _questions.filter(question => {
-            return (
-              question.answerContent !== null || question.answerContent !== ''
-            );
-          }),
-        );
+        if (response.data.message === 'The data does not exist') {
+        } else {
+          setQuestions(response.data);
+          const _questions = response.data;
+          setQuestions(
+            _questions.filter(question => {
+              return (
+                question.answerContent !== null || question.answerContent !== ''
+              );
+            }),
+          );
+        }
       } catch (e) {
         console.log(e);
       }
@@ -49,8 +52,12 @@ const List = () => {
   if (loading) {
     return <div>대기 중...</div>;
   }
-  if (!questions.data) {
-    return <div>죄송합니다. 오류가 발생하였습니다.</div>;
+  if (questions.length === 0) {
+    return (
+      <div className="container">
+        작성된 일기가 없습니다. 다시 시도해주세요.
+      </div>
+    );
   }
   return (
     <div className="container">
