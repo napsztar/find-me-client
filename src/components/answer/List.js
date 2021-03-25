@@ -6,13 +6,14 @@ import { MdModeEdit } from 'react-icons/md';
 import FloatingButton from '../../utils/FloatingButton';
 import { isEmptyObject } from '../../utils/common';
 import Header from '../header/Header';
+import ink from '../../image/fepen.png';
 
 const ListItem = ({ question }) => {
   return (
     <Link to={`/answer/${question.answerId}`}>
       <div className="item">
-        <div className="thumbnail" />
-        <div className="question">{question.questionContent}</div>
+        <img src={ink} alt="ink" />
+        <span className="question">{question.questionContent}</span>
       </div>
     </Link>
   );
@@ -44,14 +45,14 @@ const List = () => {
     return <div>죄송합니다. 오류가 발생하였습니다.</div>;
   }
   return (
-    <div className="container list">
+    <div className="container">
       <Header />
-      <div className="content">
+      <div className="content list">
         {questions.map(question => (
           <ListItem question={question} key={question.answerId} />
         ))}
+        <FloatingButton children={<MdModeEdit size={25} />} to="/answer/add" />
       </div>
-      <FloatingButton children={<MdModeEdit size={25} />} to="/answer/add" />
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
+import Header from '../header/Header';
 import '../../styles/main.scss';
 
 const MyPage = ({ handleSignOut }) => {
@@ -43,56 +44,61 @@ const MyPage = ({ handleSignOut }) => {
   return (
     <div>
       <div className="container">
-        <form onSubmit={e => e.preventDefault()}>
-          <div className="email-container">
-            <span>Email</span>
-            <input
-              type="email"
-              name="email"
-              value={email}
-              onChange={onChangeInput}
-            ></input>
-          </div>
-          <div className="nickName-container">
-            <span>Nickname</span>
-            <input
-              type="nickName"
-              name="nickName"
-              value={nickName}
-              onChange={onChangeInput}
-            ></input>
-          </div>
-          <div className="password-container">
-            <span>Password</span>
-            <input
-              type="password"
-              name="current-password"
-              value={password}
-              onChange={onChangeInput}
-            ></input>
-          </div>
-          <div className="change-password-container">
-            <span>Change Password</span>
-            <input
-              type="password"
-              name="new-password"
-              value={changePassword}
-              onChange={onChangeInput}
-              placeholder="Enter a password to change"
-            ></input>
-          </div>
-          <div className="btn-container">
+        <Header />
+        <div className="content mypage">
+          <form onSubmit={e => e.preventDefault()}>
+            <div className="email-container">
+              <div>Email</div>
+              <input
+                type="email"
+                name="email"
+                value={email}
+                onChange={onChangeInput}
+                placeholder="Enter your email"
+              ></input>
+            </div>
+            <div className="nickname-container">
+              <div>Nickname</div>
+              <input
+                type="nickName"
+                name="nickName"
+                value={nickName}
+                onChange={onChangeInput}
+                placeholder="Enter your nickname"
+              ></input>
+            </div>
+            <div className="password-container">
+              <div>Password</div>
+              <input
+                type="password"
+                name="password"
+                value={password}
+                onChange={onChangeInput}
+                placeholder="Enter your password"
+              ></input>
+            </div>
+            <div className="change-password-container">
+              <div>Change Password</div>
+              <input
+                type="password"
+                name="changePassword"
+                value={changePassword}
+                onChange={onChangeInput}
+                placeholder="Enter a password to change"
+              ></input>
+            </div>
+
             {errorMessage === '' ? null : (
               <div className="error-box">{errorMessage}</div>
             )}
-            <button type="submit" onClick={handleChangePassword}>
+            <button className="signout-btn" onClick={handleChangePassword}>
               비밀번호 변경
             </button>
-            <button type="submit" onClick={handleSignOut}>
+            <button className="delete-btn" onClick={handleSignOut}>
               회원탈퇴
             </button>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
   );
