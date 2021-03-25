@@ -54,25 +54,6 @@ const Add = ({ history }) => {
     }
   };
 
-  // useEffect(() => {
-  //   if (isEmptyObject(state.question)) {
-  //     (async () => {
-  //       actions.setLoading(true);
-  //       try {
-  //         const response = await axios.post(
-  //           `${process.env.REACT_APP_SERVER_HOST}/intro`,
-  //           { accessToken: storeState.accToken },
-  //           { 'Content-Type': 'application/json', withCredentials: true },
-  //         );
-  //         actions.setQuestion(response.data);
-  //       } catch (e) {}
-  //       actions.setLoading(false);
-  //     })();
-  //   }
-  //   return () => {
-  //     actions.setLoading(false);
-  //   };
-  // }, []);
   if (state.loading) {
     return <div>loading...</div>;
   }
