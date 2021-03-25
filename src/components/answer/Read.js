@@ -43,18 +43,19 @@ const Read = ({ match, history }) => {
           <img src={qImg} alt="q" width="100px" height="100px" />
           <span>{answer.questionContent}</span>
         </div>
+        <hr />
+        <div className="my-answer">{answer.answerContent}</div>
+
         <div className="read-data">
-          <div>질문 받은 날짜</div>
-          {toDateFormat(answer.questionAt)}
+          질문 받은 날짜 : {toDateFormat(answer.questionAt)}
         </div>
 
         <div className="update-date">
-          <div>최근 일기 작성 날짜</div>
+          최근 일기 작성 날짜 :{' '}
           {answer.updatedAt
             ? toDateFormat(answer.updatedAt)
             : toDateFormat(answer.createdAt)}
         </div>
-        <div className="my-answer">내가 쓴 답변{answer.answerContent}</div>
 
         <button
           className="answer-btn"

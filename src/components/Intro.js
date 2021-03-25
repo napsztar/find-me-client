@@ -48,10 +48,16 @@ const Intro = () => {
         <div className="logo-container">
           <img src={logo} alt="logo" width="100%" />
         </div>
-        <div className="title">Today's carrot question</div>
+        <div className="title">Today's question</div>
         <div className="today-question">{state.question.questionContent}</div>
         <Link to={'/answer/'}>
-          <img src={introImg} alt="carrot" width="400px" height="445x" />
+          <img
+            className="diary"
+            src={introImg}
+            alt="carrot"
+            width="400px"
+            height="445x"
+          />
         </Link>
         <FloatingButton children={<MdModeEdit size={25} />} to="/answer/add" />
       </div>

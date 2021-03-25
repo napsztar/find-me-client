@@ -2,10 +2,12 @@
 
 * {
   box-sizing: border-box;
+
   &::before,
   &::after {
     box-sizing: border-box;
   }
+
   padding: 0;
   margin: 0;
 }
@@ -59,9 +61,11 @@ body {
       text-decoration: none;
       margin-left: 1em;
     }
+
     :visited {
       color: #df8f54;
     }
+
     .signout-btn {
       color: #df8f54;
     }
@@ -89,12 +93,12 @@ body {
     }
 
     .confirm {
-      border-color: #ff85a2;
-      color: hotpink;
+      border-color: #a4896d;
+      color: #a4896d;
     }
 
     .confirm:hover {
-      background: #ff85a2;
+      background: #a4896d;
       color: white;
     }
 
@@ -201,6 +205,7 @@ body {
         text-align: center;
         box-shadow: 2px 5px 10px -3px #f3d1b7;
       }
+
       textarea::placeholder {
         font-family: 'PT Serif', serif;
         font-style: italic;
@@ -223,15 +228,29 @@ body {
 
       .read-data {
         text-align: right;
-        margin-bottom: 2em;
+        margin-bottom: 1em;
+        margin-right: 7em;
+        color: #A4896D;
       }
 
       .update-date {
         text-align: right;
+        color: #A4896D;
+        margin-right: 7em;
+        margin-bottom: 5em;
       }
 
       .my-answer {
-        margin: 2em 4em;
+        margin: 5em 4em 10em 4em;
+      }
+
+      hr {
+        border: none;
+        border-top: 3px solid #EDE2E0;
+        background-color: #ffffff00;
+        height: 0.5px;
+        width: 70%;
+        margin: 1em 2em 4em 10em;
       }
     }
 
@@ -269,17 +288,22 @@ body {
       }
 
       .title {
-        margin: 2.5em 2.5em;
-        font-family: 'PT Serif', serif;
-        font-size: 20px;
+        margin: 4em 1em -1.5em 1em;
+        color: #72320d;
+        font-family: 'Nanum Brush Script', cursive;
+        font-size: 30px;
         text-align: center;
       }
 
       .today-question {
-        margin: 3.5em 3.5em;
+        margin: 3.5em 1em;
         font-size: 40px;
         text-align: center;
         font-family: 'Nanum Brush Script', cursive;
+      }
+
+      .diary {
+        margin-top: -2em;
       }
 
       .floating-button {
@@ -333,6 +357,7 @@ body {
           font-style: italic;
           font-size: 16px;
         }
+
         input:focus {
           outline: 2px solid #ffddbc;
         }
@@ -409,10 +434,12 @@ body {
             text-align: center;
           }
         }
+
         .signup-info-container:focus {
           outline: 0;
         }
       }
+
       .signup-info-container {
         border: none;
         font-size: 15px;
@@ -513,6 +540,7 @@ body {
               color: #655341b0;
             }
           }
+
           .check-password-box {
             margin-top: 2em;
             margin-left: 1em;
@@ -581,6 +609,7 @@ body {
     &.mypage {
       form {
         flex-direction: column;
+
         input {
           width: 25em;
           height: 4em;
@@ -639,6 +668,7 @@ body {
             color: #655341b0;
           }
         }
+
         .change-password-container {
           margin-top: 3em;
           margin-left: 1em;
@@ -651,6 +681,7 @@ body {
             color: #655341b0;
           }
         }
+
         .error-box {
           text-align: center;
           margin-top: 1em;
@@ -668,10 +699,12 @@ body {
           width: 6em;
           height: 4em;
         }
+
         .signout-btn {
           margin-top: 2em;
           margin-left: 10em;
         }
+
         .delete-btn {
           margin-top: 2em;
           margin-left: 1.5em;
