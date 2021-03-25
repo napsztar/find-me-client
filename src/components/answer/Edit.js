@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import '../../styles/main.scss';
 import Header from '../header/Header';
 import axios from 'axios';
-import List from './List';
 import { isEmptyObject } from '../../utils/common';
 import { OneModal } from '../../utils/Modal';
+import qImg from '../../image/q.png';
 
 const Edit = ({ match, history }) => {
   const answerId = match.params.answerId;
@@ -22,8 +22,10 @@ const Edit = ({ match, history }) => {
           { answerId: answerId },
           { 'Content-Type': 'application/json', withCredentials: true },
         );
-        setAnswer(response.data);
-        setEditAnswer(answer.answerContent);
+        if (response.data) {
+          setAnswer(response.data);
+          setEditAnswer(response.data.answerContent);
+        }
       } catch (e) {
         console.log(e);
       }
@@ -50,7 +52,11 @@ const Edit = ({ match, history }) => {
             { answerId: answer.answerId, answerContent: editAnswer },
             { 'Content-Type': 'application/json', withCredentials: true },
           );
-          setIsModalDisplay(true);
+          if (
+            response.data.message === 'A answer has been successfully updated'
+          ) {
+            setIsModalDisplay(true);
+          }
         } catch (e) {
           console.log(e);
         }
@@ -61,16 +67,25 @@ const Edit = ({ match, history }) => {
     return null;
   }
   return (
-    <div className="container edit">
+    <div className="container">
       <Header />
-      <div>{answer.questionContent}</div>
-      <textarea
-        value={editAnswer}
-        onChange={e => {
-          setEditAnswer(e.target.value);
-        }}
-      />
-      <button onClick={handleEditAnswer}>수정하기</button>
+      <div className="content edit">
+        <div className="edit-question">
+          <img src={qImg} alt="q" width="100px" height="100px" />
+          <span>{answer.questionContent}</span>
+        </div>
+        <textarea
+          value={editAnswer}
+          onChange={e => {
+            setEditAnswer(e.target.value);
+          }}
+        />
+        <div>
+          <button className="answer-btn" onClick={handleEditAnswer}>
+            수정
+          </button>
+        </div>
+      </div>
       <OneModal
         isModalDisplay={isModalDisplay}
         handleModalDisplay={handleModalDisplay}

@@ -20,7 +20,7 @@ const ListItem = ({ question }) => {
 };
 
 const List = () => {
-  const [questions, setQuestions] = useState({});
+  const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     (async () => {
@@ -32,6 +32,12 @@ const List = () => {
           { 'Content-Type': 'application/json', withCredentials: true },
         );
         setQuestions(response.data);
+        setQuestions(
+          questions.filter(
+            question =>
+              question.answerContent !== null || question.answerContent !== '',
+          ),
+        );
       } catch (e) {
         console.log(e);
       }
@@ -41,7 +47,7 @@ const List = () => {
   if (loading) {
     return <div>대기 중...</div>;
   }
-  if (isEmptyObject(questions)) {
+  if (questions.length === 0) {
     return <div>죄송합니다. 오류가 발생하였습니다.</div>;
   }
   return (
