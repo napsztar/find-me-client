@@ -32,11 +32,13 @@ const List = () => {
           { 'Content-Type': 'application/json', withCredentials: true },
         );
         setQuestions(response.data);
+        const _questions = response.data;
         setQuestions(
-          questions.filter(
-            question =>
-              question.answerContent !== null || question.answerContent !== '',
-          ),
+          _questions.filter(question => {
+            return (
+              question.answerContent !== null || question.answerContent !== ''
+            );
+          }),
         );
       } catch (e) {
         console.log(e);
@@ -57,7 +59,6 @@ const List = () => {
         {questions.map(question => (
           <ListItem question={question} key={question.answerId} />
         ))}
-        <FloatingButton children={<MdModeEdit size={25} />} to="/answer/add" />
       </div>
     </div>
   );
