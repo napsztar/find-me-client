@@ -1,11 +1,17 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
 import Header from '../header/Header';
 import '../../styles/main.scss';
+
+import { store } from '../../contexts/store';
+import { login, logout } from '../../contexts/actionCreators';
+
+const MyPage = ({ history }) => {
+  const [storeState, dispatch] = useContext(store);
+
 import { OneModal, TwoModal } from '../../utils/Modal';
 
-const MyPage = ({ handleSignOut, history }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [inputs, setInputs] = useState({
     email: '',
@@ -35,6 +41,12 @@ const MyPage = ({ handleSignOut, history }) => {
 
   const { email, nickName, password, changePassword } = inputs;
 
+  const signOutSuccess = e => {
+    e.preventDefault();
+    dispatch(logout());
+    history.push('/intro');
+  };
+
   const onChangeInput = e => {
     const { value, name } = e.target;
     setInputs({
@@ -43,24 +55,32 @@ const MyPage = ({ handleSignOut, history }) => {
     });
   };
 
-  const handleChangePassword = () => {
+  const handleWithdawal = async e => {
+    await axios
+      .post(
+        `${process.env.REACT_APP_SERVER_HOST}/users/delete`,
+        { accessToken: storeState.accToken },
+        { 'Content-Type': 'application/json', withCredentials: true },
+      )
+      .catch(err => console.log(err));
+    await signOutSuccess(e);
+  };
+
+  const handleChangePassword = async e => {
     if (!email || !nickName || !password || !changePassword) {
       setErrorMessage({ errorMessage: '모든 항목은 필수입니다' });
     } else {
-      axios
+      await axios
         .post(
-          `${process.env.REACT_APP_SERVER_HOST}/users/:userid/update`,
-          {
-            email: email,
-            nickname: nickName,
-            password: changePassword,
-          },
+          `${process.env.REACT_APP_SERVER_HOST}/users/update`,
+          { accessToken: storeState.accToken, changePassword: changePassword },
           { 'Content-Type': 'application/json', withCredentials: true },
         )
         .then(res => {
           setIsChangePasswordModalDisplay(true);
         })
         .catch(err => console.log(err));
+      await signOutSuccess(e);
     }
   };
   return (
@@ -109,18 +129,18 @@ const MyPage = ({ handleSignOut, history }) => {
                 placeholder="Enter a password to change"
               ></input>
             </div>
-
             {errorMessage === '' ? null : (
               <div className="error-box">{errorMessage}</div>
             )}
             <button className="signout-btn" onClick={handleChangePassword}>
               비밀번호 변경
             </button>
+
             <button
               className="delete-btn"
               onClick={() => {
                 setIsWithdrawalModalDisplay(true);
-                handleSignOut();
+                handleWithdawal();
               }}
             >
               회원탈퇴

@@ -3,6 +3,7 @@ import '../../styles/main.scss';
 import QuestionContext from '../../contexts/question';
 import Header from '../header/Header';
 import { equalsDate, isEmptyObject } from '../../utils/common';
+import { store } from '../../contexts/store';
 import axios from 'axios';
 import { OneModal } from '../../utils/Modal';
 import qImg from '../../image/q.png';
@@ -11,11 +12,17 @@ const Add = ({ history }) => {
   const { state, actions } = useContext(QuestionContext);
   const [answerContent, setAnswerContent] = useState('');
   const [isModalDisplay, setIsModalDisplay] = useState(false);
+
+  const [storeState, dispatch] = useContext(store);
+  const handleModalDisplay = value => {
+    setIsModalDisplay(value);
+
   const handleModalDisplay = isOk => {
     setIsModalDisplay(false);
     if (isOk) {
       history.push('/answer');
     }
+
   };
   const handleAddAnswer = () => {
     if (answerContent !== '' && answerContent) {
@@ -24,12 +31,15 @@ const Add = ({ history }) => {
         try {
           const response = await axios.post(
             `${process.env.REACT_APP_SERVER_HOST}/answer/add`,
-            { answerId: state.question.answerId, answerContent: answerContent },
+            {
+              answerId: state.question.answerId,
+              answerContent: answerContent,
+              accessToken: storeState.accToken,
+            },
             { 'Content-Type': 'application/json', withCredentials: true },
           );
 
-          // 로그인이 안 되어 있으면 페이지로 보내기
-          console.log(response.data);
+       
           if (response.data.message) {
             if (response.data.message === 'invalid access token') {
               // history.push('/');
@@ -54,7 +64,7 @@ const Add = ({ history }) => {
         try {
           const response = await axios.post(
             `${process.env.REACT_APP_SERVER_HOST}/intro`,
-            {},
+            { accessToken: storeState.accToken },
             { 'Content-Type': 'application/json', withCredentials: true },
           );
           actions.setQuestion(response.data);

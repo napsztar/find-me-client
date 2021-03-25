@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import '../../styles/main.scss';
 import Header from '../header/Header';
 import axios from 'axios';
 import { isEmptyObject } from '../../utils/common';
+import { store } from '../../contexts/store';
 import { OneModal } from '../../utils/Modal';
 import qImg from '../../image/q.png';
+
 
 const Edit = ({ match, history }) => {
   const answerId = match.params.answerId;
@@ -12,6 +14,7 @@ const Edit = ({ match, history }) => {
   const [answer, setAnswer] = useState({});
   const [editAnswer, setEditAnswer] = useState('');
   const [isModalDisplay, setIsModalDisplay] = useState(false);
+  const [storeState, dispatch] = useContext(store);
 
   useEffect(() => {
     (async () => {
@@ -19,7 +22,7 @@ const Edit = ({ match, history }) => {
       try {
         const response = await axios.post(
           `${process.env.REACT_APP_SERVER_HOST}/answer/read`,
-          { answerId: answerId },
+          { answerId: answerId, accessToken: storeState.accToken },
           { 'Content-Type': 'application/json', withCredentials: true },
         );
         if (response.data) {
@@ -49,7 +52,11 @@ const Edit = ({ match, history }) => {
         try {
           const response = await axios.post(
             `${process.env.REACT_APP_SERVER_HOST}/answer/edit`,
-            { answerId: answer.answerId, answerContent: editAnswer },
+            {
+              answerId: answer.answerId,
+              answerContent: editAnswer,
+              accessToken: storeState.accToken,
+            },
             { 'Content-Type': 'application/json', withCredentials: true },
           );
           if (

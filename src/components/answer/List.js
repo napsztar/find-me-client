@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import '../../styles/main.scss';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -6,7 +6,9 @@ import { MdModeEdit } from 'react-icons/md';
 import FloatingButton from '../../utils/FloatingButton';
 import { isEmptyObject } from '../../utils/common';
 import Header from '../header/Header';
+import { store } from '../../contexts/store';
 import ink from '../../image/fepen.png';
+
 
 const ListItem = ({ question }) => {
   return (
@@ -22,13 +24,14 @@ const ListItem = ({ question }) => {
 const List = () => {
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [storeState, dispatch] = useContext(store);
   useEffect(() => {
     (async () => {
       setLoading(true);
       try {
         const response = await axios.post(
           `${process.env.REACT_APP_SERVER_HOST}/answer`,
-          {},
+          { accessToken: storeState.accToken },
           { 'Content-Type': 'application/json', withCredentials: true },
         );
         setQuestions(response.data);

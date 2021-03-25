@@ -1,5 +1,5 @@
 import { Switch, Route, withRouter } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 import Add from './components/answer/Add';
 import Edit from './components/answer/Edit';
@@ -12,70 +12,80 @@ import MyPage from './components/user/Mypage';
 import TestModal from './components/test/TestModal';
 import Intro from './components/Intro';
 import axios from 'axios';
+
 import { QuestionProvider } from './contexts/question';
+import { store } from './contexts/store';
+import { login } from './contexts/actionCreators';
+import { getNeedLogInPage } from './utils/common';
 
 const App = ({ history, location }) => {
-  const [isSigned, setIsSigned] = useState(false);
+  const [loginState, dispatch] = useContext(store);
 
-  const signInSuccess = () => {
-    setIsSigned({
-      isSigned: true,
-    });
-  };
-
-  const signOutComplete = () => {
-    setIsSigned({ isSigned: false });
-    history.push('/');
-  };
-
-  const socialLoginHandler = () => {
-    window.location.assign(
-      'https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=101615654292-d5eqm5ke1i58qcqbfg0ktrp7hdbd0mpt.apps.googleusercontent.com&scope=email profile&redirect_uri=http://localhost:3000',
-    );
+  const signInSuccess = e => {
+    e.preventDefault();
+    dispatch(login());
+    history.push('/intro');
   };
 
   useEffect(() => {
     const authCode = new URLSearchParams(location.search).get('code');
-    //console.log(authCode);
     if (authCode) {
-      function getAccessToken(authCode) {
-        axios
-          .post(
-            'http://localhost:5000/callback',
-            {
-              code: authCode,
-            },
-            { 'Content-Type': 'application/json', withCredentials: true },
-          )
-          .then(() => signInSuccess(), history.push('/intro'));
-      }
-
-      getAccessToken(authCode);
+      axios
+        .post(
+          'http://localhost:5000/callback',
+          {
+            code: authCode,
+          },
+          { 'Content-Type': 'application/json', withCredentials: true },
+        )
+        .then(() => signInSuccess());
     }
   }, []);
 
   return (
     <div>
       <Switch>
-        <Route exact path="/">
-          <SignIn
-            isSigned={isSigned}
-            signInSuccess={signInSuccess}
-            socialLoginHandler={socialLoginHandler}
-          />
-        </Route>
+        <Route
+          exact
+          path="/"
+          component={getNeedLogInPage(Intro, loginState.isLoggedIn)}
+        />
         <Route exact path="/users/signup">
-          <SignUp signOutComplete={signOutComplete} />
+          <SignUp />
         </Route>
+        <Route exact path="/signin" component={SignIn} />
         <Route exact path="/test/modal" component={TestModal} />
-        <Route exact path="/intro" component={Intro} />
-        <Route exact path="/answer/" component={List} />
-        <Route exact path="/answer/add" component={Add} />
-        <Route exact path="/answer/:answerId/edit" component={Edit} />
-        <Route exact path="/answer/:answerId" component={Read} />
-        <Route exact path="/users">
-          <MyPage signOutComplete={signOutComplete} />
-        </Route>
+
+        <Route
+          exact
+          path="/intro"
+          component={getNeedLogInPage(Intro, loginState.isLoggedIn)}
+        />
+        <Route
+          exact
+          path="/answer"
+          component={getNeedLogInPage(List, loginState.isLoggedIn)}
+        />
+        <Route
+          exact
+          path="/answer/add"
+          component={getNeedLogInPage(Add, loginState.isLoggedIn)}
+        />
+        <Route
+          exact
+          path="/answer/:answerId/edit"
+          component={getNeedLogInPage(Edit, loginState.isLoggedIn)}
+        />
+        <Route
+          exact
+          path="/answer/:answerId"
+          component={getNeedLogInPage(Read, loginState.isLoggedIn)}
+        />
+        <Route
+          exact
+          path="/users"
+          component={getNeedLogInPage(MyPage, loginState.isLoggedIn)}
+        />
       </Switch>
     </div>
   );

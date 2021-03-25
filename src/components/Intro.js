@@ -7,9 +7,11 @@ import { equalsDate, isEmptyObject } from '../utils/common';
 import { Link } from 'react-router-dom';
 import FloatingButton from '../utils/FloatingButton';
 import { MdModeEdit } from 'react-icons/md';
+import { store } from '../contexts/store';
 
 const Intro = () => {
   const { state, actions } = useContext(QuestionContext);
+  const [tokenState, dispatch] = useContext(store);
   useEffect(() => {
     if (
       isEmptyObject(state.question) ||
@@ -20,7 +22,7 @@ const Intro = () => {
         try {
           const response = await axios.post(
             `${process.env.REACT_APP_SERVER_HOST}/intro`,
-            {},
+            { accessToken: tokenState.accToken },
             { 'Content-Type': 'application/json', withCredentials: true },
           );
 

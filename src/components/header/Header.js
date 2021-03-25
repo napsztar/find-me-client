@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { BiBookHeart } from 'react-icons/bi';
 import { BsFillPersonFill } from 'react-icons/bs';
@@ -6,20 +6,33 @@ import axios from 'axios';
 import logo from '../../image/logo.png';
 import '../../styles/main.scss';
 
-const Header = ({ signOutComplete }) => {
+import { store } from '../../contexts/store';
+import { login, logout } from '../../contexts/actionCreators';
+
+const Header = ({ history }) => {
   const [isToggleOn, setToggleOn] = useState(false);
+  const [storeState, dispatch] = useContext(store);
+
+  const signOutComplete = e => {
+    e.preventDefault();
+    dispatch(logout());
+    history.push('/');
+  };
 
   const handleToggle = () => {
     setToggleOn(!isToggleOn);
   };
 
-  const handleSignOut = () => {
-    axios
-      .post(`${process.env.REACT_APP_SERVER_HOST}/users/signout`, {
+  const handleSignOut = async e => {
+    await axios.post(
+      `${process.env.REACT_APP_SERVER_HOST}/users/signout`,
+      { accessToken: storeState.accToken },
+      {
         'Content-Type': 'application/json',
         withCredentials: true,
-      })
-      .then(() => signOutComplete());
+      },
+    );
+    await signOutComplete(e);
   };
 
   return (

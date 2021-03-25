@@ -1,22 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Edit from './Edit';
+import { isEmptyObject } from '../../utils/common';
+import { store } from '../../contexts/store';
 import { isEmptyObject, toDateFormat } from '../../utils/common';
 import Header from '../header/Header';
 import qImg from '../../image/q.png';
+
 
 const Read = ({ match, history }) => {
   const { answerId } = match.params;
   const [loading, setLoading] = useState(false);
   const [answer, setAnswer] = useState({});
+  const [storeState, dispatch] = useContext(store);
   useEffect(() => {
     (async () => {
       setLoading(true);
       try {
         const response = await axios.post(
           `${process.env.REACT_APP_SERVER_HOST}/answer/read`,
-          { answerId: answerId },
+          { answerId: answerId, accessToken: storeState.accToken },
           { 'Content-Type': 'application/json', withCredentials: true },
         );
         setAnswer(response.data);
