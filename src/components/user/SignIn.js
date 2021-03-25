@@ -7,9 +7,7 @@ import '../../styles/main.scss';
 import { store } from '../../contexts/store';
 import { login, logout, taketoken } from '../../contexts/actionCreators';
 
-
 const SignIn = ({ history }) => {
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -45,6 +43,11 @@ const SignIn = ({ history }) => {
         .then(data => {
           dispatch(taketoken(data.data.accToken));
           signInSuccess(e);
+        })
+        .catch(err => {
+          err.response.status === 401
+            ? setErrorMessage('비밀번호가 일치하지 않습니다.')
+            : alert(err);
         });
     }
   };
