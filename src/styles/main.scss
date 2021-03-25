@@ -58,6 +58,120 @@ body {
     :link {
       text-decoration: none;
       margin-left: 1em;
+
+    }
+    :visited {
+      color: #df8f54;
+    }
+    .signout-btn {
+      color: #df8f54;
+    }
+  }
+
+  .modal {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    font-family: "Nanum Brush Script", cursive;
+    font-size: 2rem;
+
+    .btn {
+      display: inline-block;
+      border: 2px solid black;
+      background-color: white;
+      color: black;
+      padding: 7px 14px;
+      font-family: "Nanum Brush Script", cursive;
+      font-size: 1.4rem;
+      cursor: pointer;
+      border-radius: 10px;
+    }
+
+    .confirm {
+      border-color: #ff85a2;
+      color: hotpink;
+    }
+
+    .confirm:hover {
+      background: #ff85a2;
+      color: white;
+    }
+
+    .cancel {
+      border-color: lightgray;
+      color: black;
+    }
+
+    .cancel:hover {
+      background: lightgray;
+    }
+
+    .modal-content {
+      width: 400px;
+      height: 200px;
+      margin: 300px auto;
+      padding: 20px 10px;
+      background: white;
+      border: #A4896D solid 4px;
+      text-align: center;
+      box-shadow:2px 5px 10px -3px #f3d1b7;
+
+      p {
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+
+      .modal-one-btn {
+        margin: 50px auto 0;
+      }
+
+      .modal-two-btn {
+        display: flex;
+        justify-content: space-between;
+        padding: 30px 60px 0;
+      }
+    }
+
+    .modal-layer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: -1;
+    }
+  }
+
+
+  .content {
+    &.list {
+      padding-bottom: 40px;
+
+      .item {
+        font-family: 'Nanum Brush Script', cursive;
+        font-size: 40px;
+        color: #492f14;
+        width: 16em;
+        height: 3em;
+        border: 1px solid #a58a6e;
+        position: relative;
+        box-shadow: 2px 2px 10px;
+        font-weight: 50;
+        margin: 1.5em;
+      }
+
+      .item:hover {
+        .question {
+          color: #e3c381;
+        }
+      }
+
+      :link {
+        text-decoration: none;
+      }
     }
     :visited {
       color: #df8f54;
@@ -101,7 +215,203 @@ body {
         margin-top: 0.4em;
         -webkit-filter: opacity(0.5) drop-shadow(0 0 0 brown);
         filter: opacity(0.5) drop-shadow(0 0 0 brown);
-        //color: #a58a6e;
+
+      }
+    }
+
+    &.add {
+      text-align: center;
+
+      .add-question {
+        font-size: 2.3rem;
+        margin: 23px 4em 2em;
+        font-family: 'Nanum Brush Script', cursive;
+      }
+
+      textarea {
+        min-width: 533px;
+        min-height: 430px;
+        width: 25em;
+        height: 4em;
+        margin: 1em;
+        font-size: 15px;
+        border: none;
+        text-align: center;
+        box-shadow: 2px 5px 10px -3px #f3d1b7;
+      }
+
+      textarea:focus {
+        outline: none;
+      }
+    }
+
+    &.read {
+      text-align: center;
+
+      .read-question {
+        font-size: 2.3rem;
+        margin: 23px 4em 2em;
+        font-family: 'Nanum Brush Script', cursive;
+      }
+
+      .read-data {
+        text-align: right;
+        margin-bottom: 2em
+      }
+
+      .update-date {
+        text-align: right;
+      }
+
+      .my-answer {
+        margin: 2em 4em;
+      }
+    }
+
+    &.edit {
+      text-align: center;
+
+      .edit-question {
+        font-size: 2.3rem;
+        margin: 23px 4em 2em;
+        font-family: 'Nanum Brush Script', cursive;
+      }
+
+      textarea {
+        min-width: 533px;
+        min-height: 430px;
+        width: 25em;
+        height: 4em;
+        margin: 1em;
+        font-size: 15px;
+        border: none;
+        text-align: center;
+        box-shadow: 2px 5px 10px -3px #f3d1b7;
+      }
+
+      textarea:focus {
+        outline: none;
+      }
+    }
+
+    &.intro {
+      text-align: center;
+
+      .logo-container {
+        margin: 0.5em 8.5em;
+      }
+
+      .title {
+        margin: 2.5em 2.5em;
+        font-family: 'PT Serif', serif;
+        font-size: 20px;
+        text-align: center;
+      }
+
+      .today-question {
+        margin: 3.5em 3.5em;
+        font-size: 40px;
+        text-align: center;
+        font-family: 'Nanum Brush Script',cursive;
+      }
+
+      .floating-button {
+        position: fixed;
+        width: 50px;
+        height: 50px;
+        bottom: 50px;
+        margin-left: 710px;
+        background-color: #dd8f53;
+        color: #fff;
+        border-radius: 50px;
+        box-shadow: 1.5px 1px 2px #999;
+        padding-top: 6px;
+      }
+    }
+
+    //signin page
+    &.signin {
+      img {
+        display: flex;
+        flex: 3 3 auto;
+        margin: 5em;
+        margin-left: 2em;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex: 1 1 auto;
+        margin-top: 2em;
+        margin-bottom: -3em;
+
+        .error-box {
+          text-align: center;
+          margin-top: 1em;
+          font-style: italic;
+        }
+
+        input {
+          width: 25em;
+          height: 4em;
+          margin: 1em;
+          font-size: 15px;
+          border: none;
+          text-align: center;
+          box-shadow: 2px 5px 10px -3px #f3d1b7;
+        }
+
+        input::placeholder {
+          color: #b1a394;
+          font-style: italic;
+          font-size: 16px;
+        }
+        input:focus {
+          outline: 2px solid #ffddbc;
+        }
+
+        button {
+          color: hsl(222, 25%, 14%);
+          border: none;
+          background-color: #ffddbc;
+          box-shadow: 2px 5px 10px -3px #f3c0b748;
+          text-align: center;
+          font-size: 15px;
+          width: 25em;
+          height: 4em;
+          margin: 3em 1em;
+        }
+
+        button:focus {
+          outline: 0;
+        }
+
+        button:hover {
+          animation: swingHorizontal 1s ease;
+          animation-iteration-count: 1;
+        }
+
+        @keyframes swingHorizontal {
+          15% {
+            transform: translateX(5px);
+          }
+          30% {
+            transform: translateX(-5px);
+          }
+          50% {
+            transform: translateX(3px);
+          }
+          65% {
+            transform: translateX(-3px);
+          }
+          80% {
+            transform: translateX(2px);
+          }
+          100% {
+            transform: translateX(0);
+          }
+        }
       }
     }
 
@@ -130,7 +440,7 @@ body {
         padding-top: 6px;
       }
     }
-    //signin page
+
     &.signin {
       img {
         display: flex;
@@ -243,10 +553,14 @@ body {
           span {
             text-align: center;
           }
+
+
+
         }
         .signup-info-container:focus {
           outline: 0;
         }
+
       }
       .signup-info-container {
         border: none;
@@ -256,19 +570,20 @@ body {
         cursor: text;
         background-color: #ffffff00;
 
-        .social-signin:focus {
-          outline: 0;
-        }
+          .social-signin:focus {
+            outline: 0;
+          }
 
-        a {
-          text-decoration: none;
-          font: 16px bold;
-          color: #f76d6a;
-          margin-left: 2em;
-        }
-        .blinking {
-          animation: blink 1.5s ease-in-out infinite alternate;
-        }
+          a {
+            text-decoration: none;
+            font: 16px bold;
+            color: #f76d6a;
+            margin-left: 2em;
+          }
+
+          .blinking {
+            animation: blink 1.5s ease-in-out infinite alternate;
+          }
 
         @keyframes blink {
           0% {
@@ -281,7 +596,7 @@ body {
       }
     }
 
-    //signup
+    
     &.signup {
       .userinfo-container {
         display: flex;
@@ -305,6 +620,7 @@ body {
             font-style: italic;
             font-size: 16px;
           }
+
 
           input:focus {
             outline: 2px solid #ffddbc;
@@ -382,9 +698,182 @@ body {
         margin: 4em 1em 1em 2em;
       }
 
-      button:focus {
-        outline: 0;
+        button:focus {
+          outline: 0;
+        }
+
+        button:hover {
+          animation: swingHorizontal 1s ease;
+          animation-iteration-count: 1;
+        }
+
+        @keyframes swingHorizontal {
+          15% {
+            transform: translateX(5px);
+          }
+          30% {
+            transform: translateX(-5px);
+          }
+          50% {
+            transform: translateX(3px);
+          }
+          65% {
+            transform: translateX(-3px);
+          }
+          80% {
+            transform: translateX(2px);
+          }
+          100% {
+            transform: translateX(0);
+          }
+        }
       }
+
+
+    &.mypage {
+      form {
+        flex-direction: column;
+        input {
+          width: 25em;
+          height: 4em;
+          margin: 1em;
+          font-size: 15px;
+          border: none;
+          text-align: center;
+          box-shadow: 2px 5px 10px -3px #f3d1b7;
+        }
+
+
+          input:focus {
+            outline: 2px solid #ffddbc;
+          }
+
+
+          .email-box {
+            margin-top: 3.8em;
+            margin-left: 1em;
+
+            div {
+              font-size: 25px;
+              font-weight: 600;
+              text-align: left;
+              margin-left: 0.8em;
+              color: #655341b0;
+            }
+          }
+
+          .nickname-box {
+            margin-top: 2em;
+            margin-left: 1em;
+
+            div {
+              font-size: 25px;
+              font-weight: 600;
+              text-align: left;
+              margin-left: 0.8em;
+              color: #655341b0;
+            }
+          }
+
+          .password-box {
+            margin-top: 2em;
+            margin-left: 1em;
+
+            div {
+              font-size: 25px;
+              font-weight: 600;
+              text-align: left;
+              margin-left: 0.8em;
+              color: #655341b0;
+            }
+          }
+          .check-password-box {
+            margin-top: 2em;
+            margin-left: 1em;
+
+            div {
+              font-size: 25px;
+              font-weight: 600;
+              text-align: left;
+              margin-left: 0.8em;
+              color: #655341b0;
+            }
+          }
+        }
+
+
+      }
+
+      .error-box {
+        text-align: center;
+        margin-top: 1em;
+        font-size: 18px;
+        font-style: italic;
+      }
+
+      button {
+        color: black;
+        border: none;
+        background-color: #ffddbc;
+        box-shadow: 2px 5px 10px -3px #f3c0b748;
+        text-align: center;
+        font-size: 15px;
+        width: 25em;
+        height: 4em;
+        margin: 4em 1em 1em 2em;
+      }
+
+
+        .email-container {
+          margin-top: 3.8em;
+          margin-left: 1em;
+
+
+          div {
+            font-size: 25px;
+            font-weight: 600;
+            text-align: left;
+            margin-left: 0.8em;
+            color: #655341b0;
+          }
+        }
+
+        .nickname-container {
+          margin-top: 3em;
+          margin-left: 1em;
+
+          div {
+            font-size: 25px;
+            font-weight: 600;
+            text-align: left;
+            margin-left: 0.8em;
+            color: #655341b0;
+          }
+        }
+
+        .password-container {
+          margin-top: 3em;
+          margin-left: 1em;
+
+          div {
+            font-size: 25px;
+            font-weight: 600;
+            text-align: left;
+            margin-left: 0.8em;
+            color: #655341b0;
+          }
+        }
+        .change-password-container {
+          margin-top: 3em;
+          margin-left: 1em;
+
+          div {
+            font-size: 25px;
+            font-weight: 600;
+            text-align: left;
+            margin-left: 0.8em;
+            color: #655341b0;
+          }
 
       button:hover {
         animation: swingHorizontal 1s ease;
@@ -395,20 +884,39 @@ body {
         15% {
           transform: translateX(5px);
         }
-        30% {
-          transform: translateX(-5px);
+        .error-box {
+          text-align: center;
+          margin-top: 1em;
+          font-size: 18px;
+          font-style: italic;
         }
-        50% {
-          transform: translateX(3px);
+
+        button {
+          color: hsl(0, 30%, 24%);
+          border: none;
+          background-color: hsla(0, 0%, 100%, 0);
+          transition: transform 0.2s ease, color 0.2s ease;
+          text-align: center;
+          font-size: 18px;
+          width: 6em;
+          height: 4em;
         }
-        65% {
-          transform: translateX(-3px);
+        .signout-btn {
+          margin-top: 2em;
+          margin-left: 10em;
         }
-        80% {
-          transform: translateX(2px);
+        .delete-btn {
+          margin-top: 2em;
+          margin-left: 1.5em;
         }
-        100% {
-          transform: translateX(0);
+
+        button:focus {
+          outline: 0;
+        }
+
+        button:hover {
+          transform: translateX(4px);
+          color: rgba(252, 177, 177, 0.959);
         }
       }
     }
@@ -522,5 +1030,47 @@ body {
         }
       }
     }
+  }
+}
+
+.answer-btn {
+  margin: 2em 3em;
+  background: #FFDEBC;
+  color: black;
+  border: none;
+  position: relative;
+  height: 60px;
+  font-size: 1.6em;
+  padding: 0 2em;
+  cursor: pointer;
+  transition: 800ms ease all;
+  outline: none;
+
+  &:hover {
+    background: #fff;
+    color: #dd8f53;
+  }
+
+  &:before, &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 2px;
+    width: 0;
+    background: #dd8f53;
+    transition: 400ms ease all;
+  }
+
+  &:after {
+    right: inherit;
+    top: inherit;
+    left: 0;
+    bottom: 0;
+  }
+
+  &:hover:before, &:hover:after {
+    width: 100%;
+    transition: 800ms ease all;
   }
 }
