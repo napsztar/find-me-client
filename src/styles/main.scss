@@ -58,7 +58,6 @@ body {
     :link {
       text-decoration: none;
       margin-left: 1em;
-
     }
     :visited {
       color: #df8f54;
@@ -74,7 +73,7 @@ body {
     width: 100%;
     height: 100%;
     z-index: 1;
-    font-family: "Nanum Brush Script", cursive;
+    font-family: 'Nanum Brush Script', cursive;
     font-size: 2rem;
 
     .btn {
@@ -83,7 +82,7 @@ body {
       background-color: white;
       color: black;
       padding: 7px 14px;
-      font-family: "Nanum Brush Script", cursive;
+      font-family: 'Nanum Brush Script', cursive;
       font-size: 1.4rem;
       cursor: pointer;
       border-radius: 10px;
@@ -114,9 +113,9 @@ body {
       margin: 300px auto;
       padding: 20px 10px;
       background: white;
-      border: #A4896D solid 4px;
+      border: #a4896d solid 4px;
       text-align: center;
-      box-shadow:2px 5px 10px -3px #f3d1b7;
+      box-shadow: 2px 5px 10px -3px #f3d1b7;
 
       p {
         margin-top: 20px;
@@ -144,7 +143,6 @@ body {
       z-index: -1;
     }
   }
-
 
   .content {
     &.list {
@@ -180,7 +178,6 @@ body {
         margin-top: 0.4em;
         -webkit-filter: opacity(0.5) drop-shadow(0 0 0 brown);
         filter: opacity(0.5) drop-shadow(0 0 0 brown);
-
       }
     }
 
@@ -204,6 +201,11 @@ body {
         text-align: center;
         box-shadow: 2px 5px 10px -3px #f3d1b7;
       }
+      textarea::placeholder {
+        font-family: 'PT Serif', serif;
+        font-style: italic;
+        font-size: 23px;
+      }
 
       textarea:focus {
         outline: none;
@@ -221,7 +223,7 @@ body {
 
       .read-data {
         text-align: right;
-        margin-bottom: 2em
+        margin-bottom: 2em;
       }
 
       .update-date {
@@ -277,7 +279,7 @@ body {
         margin: 3.5em 3.5em;
         font-size: 40px;
         text-align: center;
-        font-family: 'Nanum Brush Script',cursive;
+        font-family: 'Nanum Brush Script', cursive;
       }
 
       .floating-button {
@@ -406,14 +408,10 @@ body {
           span {
             text-align: center;
           }
-
-
-
         }
         .signup-info-container:focus {
           outline: 0;
         }
-
       }
       .signup-info-container {
         border: none;
@@ -423,20 +421,20 @@ body {
         cursor: text;
         background-color: #ffffff00;
 
-          .social-signin:focus {
-            outline: 0;
-          }
+        .social-signin:focus {
+          outline: 0;
+        }
 
-          a {
-            text-decoration: none;
-            font: 16px bold;
-            color: #f76d6a;
-            margin-left: 2em;
-          }
+        a {
+          text-decoration: none;
+          font: 16px bold;
+          color: #f76d6a;
+          margin-left: 2em;
+        }
 
-          .blinking {
-            animation: blink 1.5s ease-in-out infinite alternate;
-          }
+        .blinking {
+          animation: blink 1.5s ease-in-out infinite alternate;
+        }
 
         @keyframes blink {
           0% {
@@ -449,7 +447,6 @@ body {
       }
     }
 
-    
     &.signup {
       .userinfo-container {
         display: flex;
@@ -473,7 +470,6 @@ body {
             font-style: italic;
             font-size: 16px;
           }
-
 
           input:focus {
             outline: 2px solid #ffddbc;
@@ -551,36 +547,36 @@ body {
         margin: 4em 1em 1em 2em;
       }
 
-        button:focus {
-          outline: 0;
-        }
+      button:focus {
+        outline: 0;
+      }
 
-        button:hover {
-          animation: swingHorizontal 1s ease;
-          animation-iteration-count: 1;
-        }
+      button:hover {
+        animation: swingHorizontal 1s ease;
+        animation-iteration-count: 1;
+      }
 
-        @keyframes swingHorizontal {
-          15% {
-            transform: translateX(5px);
-          }
-          30% {
-            transform: translateX(-5px);
-          }
-          50% {
-            transform: translateX(3px);
-          }
-          65% {
-            transform: translateX(-3px);
-          }
-          80% {
-            transform: translateX(2px);
-          }
-          100% {
-            transform: translateX(0);
-          }
+      @keyframes swingHorizontal {
+        15% {
+          transform: translateX(5px);
+        }
+        30% {
+          transform: translateX(-5px);
+        }
+        50% {
+          transform: translateX(3px);
+        }
+        65% {
+          transform: translateX(-3px);
+        }
+        80% {
+          transform: translateX(2px);
+        }
+        100% {
+          transform: translateX(0);
         }
       }
+    }
 
     &.mypage {
       form {
@@ -696,7 +692,7 @@ body {
 
 .answer-btn {
   margin: 2em 3em;
-  background: #FFDEBC;
+  background: #ffdebc;
   color: black;
   border: none;
   position: relative;
@@ -712,7 +708,8 @@ body {
     color: #dd8f53;
   }
 
-  &:before, &:after {
+  &:before,
+  &:after {
     content: '';
     position: absolute;
     top: 0;
@@ -730,7 +727,8 @@ body {
     bottom: 0;
   }
 
-  &:hover:before, &:hover:after {
+  &:hover:before,
+  &:hover:after {
     width: 100%;
     transition: 800ms ease all;
   }
