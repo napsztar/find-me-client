@@ -14,15 +14,12 @@ const Add = ({ history }) => {
   const [isModalDisplay, setIsModalDisplay] = useState(false);
 
   const [storeState, dispatch] = useContext(store);
-  const handleModalDisplay = value => {
-    setIsModalDisplay(value);
 
   const handleModalDisplay = isOk => {
     setIsModalDisplay(false);
     if (isOk) {
       history.push('/answer');
     }
-
   };
   const handleAddAnswer = () => {
     if (answerContent !== '' && answerContent) {
@@ -39,7 +36,6 @@ const Add = ({ history }) => {
             { 'Content-Type': 'application/json', withCredentials: true },
           );
 
-       
           if (response.data.message) {
             if (response.data.message === 'invalid access token') {
               // history.push('/');
@@ -68,13 +64,10 @@ const Add = ({ history }) => {
             { 'Content-Type': 'application/json', withCredentials: true },
           );
           actions.setQuestion(response.data);
-        } catch (e) {
-          console.log(e);
-        }
+        } catch (e) {}
         actions.setLoading(false);
       })();
     }
-
     return () => {
       actions.setLoading(false);
     };
